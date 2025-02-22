@@ -54,6 +54,79 @@ async fn collapse_tree_item(driver: &WebDriver, css_selector: &str) -> WebDriver
     Ok(())
 }
 
+async fn add_tags(clear: bool, driver: &WebDriver) -> WebDriverResult<()> {
+    let tags = load_csv_data(TAGPATH)?;
+
+    let iframe = driver
+        .query(By::Css(r#"iframe[name="neos-content-main"]"#))
+        .first()
+        .await?;
+
+    iframe.clone().enter_frame().await?;
+
+    let content_collection = driver
+        .query(By::Css(
+            "html body.neos-backend div.container div.neos-contentcollection",
+        ))
+        .first()
+        .await?;
+
+    let questions = content_collection
+        .find_all(By::Css("p.neos-inline-editable.questionTitle"))
+        .await?;
+
+    for question in questions {
+        let text = question.text().await?;
+        let id = text.split(' ').next().unwrap();
+        let value = tags.get(id).unwrap();
+
+        question.click().await?;
+
+        driver.enter_default_frame().await?;
+
+        let tag_textbox = driver
+            .query(By::Css("#__neos__editor__property---Tags"))
+            .first()
+            .await?;
+
+        driver
+            .action_chain()
+            .click_element(&tag_textbox)
+            .key_down(Key::Control)
+            .send_keys("a")
+            .key_up(Key::Control)
+            .send_keys(Key::Backspace)
+            .perform()
+            .await?;
+
+        if !clear {
+            match tags.get(id) {
+                Some(_) => tag_textbox.send_keys(value).await?,
+                None => {
+                    eprintln!("Error: key {} not found! Skipping...", id);
+                    iframe.clone().enter_frame().await?;
+                    continue;
+                }
+            }
+        }
+
+        let apply_button = driver
+            .query(By::Css("#neos-Inspector-Apply"))
+            .first()
+            .await?;
+
+        apply_button.click().await?;
+
+        println!("{} -> {}", id, value);
+
+        iframe.clone().enter_frame().await?;
+    }
+
+    driver.enter_default_frame().await?;
+
+    Ok(())
+}
+
 #[tokio::main]
 async fn main() -> WebDriverResult<()> {
     let caps = DesiredCapabilities::firefox();
@@ -88,11 +161,13 @@ async fn main() -> WebDriverResult<()> {
     //     let text = entry.text().await?;
     //     println! {"File: {}", text};
     // }
+
     let welcome_message = r#"
     Welcome to the tag spider you can do the following actions by pressing the given keys
 
     q -> quit the program
-    t -> start the tag spider    
+    a -> add tags (must be in question answer environment) 
+    c -> clear tags (must be in question answer environment)
     "#;
 
     println!("{}", welcome_message);
@@ -101,10 +176,8 @@ async fn main() -> WebDriverResult<()> {
         if let Event::Key(event) = read().unwrap() {
             match event.code {
                 KeyCode::Char('q') => break,
-                KeyCode::Char('t') => {
-                    let tags = load_csv_data(TAGPATH).unwrap();
-                    println!("{:#?}", tags);
-                }
+                KeyCode::Char('a') => add_tags(false, &driver).await?,
+                KeyCode::Char('c') => add_tags(true, &driver).await?,
                 _ => {}
             }
         }
