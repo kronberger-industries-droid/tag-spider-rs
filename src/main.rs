@@ -14,6 +14,9 @@ static PASSWORD: Lazy<String> = Lazy::new(|| {
     // Fallbackstring add your password here if you dont use agenix
 });
 
+// ToDo:
+// Add short delay after loading the screen so the cpus don't overload!
+
 async fn login(driver: &WebDriver) -> WebDriverResult<()> {
     let username_field = driver.find(By::Id("username")).await?;
 
