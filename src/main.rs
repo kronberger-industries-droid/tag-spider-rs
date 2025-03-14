@@ -1,5 +1,6 @@
 use crossterm::event::{read, Event, KeyCode};
 use csv::Reader;
+use json::parse;
 use once_cell::sync::Lazy;
 use std::collections::HashMap;
 use std::fs;
@@ -9,14 +10,8 @@ use thirtyfour::prelude::*;
 
 static URL: &str = "https://cms.schrackforstudents.com/neos/login";
 static TAGPATH: &str = concat!(env!("CARGO_MANIFEST_DIR"), "/resources/tags.csv");
-static USERNAME: &str = "mkronberger";
-static PASSWORD: Lazy<String> = Lazy::new(|| {
-    fs::read_to_string("/run/secrets/cms-pswd").unwrap_or_else(|_| "your_fallback_here".to_string())
-    // Fallbackstring add your password here if you dont use agenix
-});
-
-// ToDo:
-// Add short delay after loading the screen so the cpus don't overload!
+static CREDENTIALS: JsonValue =
+    json::parse(fs::read_to_string("/run/secrets/cms-pswd").unwrap_or_else());
 
 async fn login(driver: &WebDriver) -> WebDriverResult<()> {
     let username_field = driver.find(By::Id("username")).await?;

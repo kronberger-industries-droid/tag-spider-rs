@@ -1,0 +1,13 @@
+1741947864057	geckodriver	INFO	Listening on 127.0.0.1:4444
+1741947892663	mozrunner::runner	INFO	Running command: MOZ_CRASHREPORTER="1" MOZ_CRASHREPORTER_NO_REPORT="1" MOZ_CRASHREPORTER_SHUTDOWN="1" MOZ_NO_REMOTE="1" "/nix ... 1n2qd4p1lygb1-firefox-135.0/bin/firefox" "--marionette" "-no-remote" "-profile" "/tmp/nix-shell.nI66VM/rust_mozprofilehi9p66"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1741947893511	Marionette	INFO	Marionette enabled
+1741947893642	Marionette	INFO	Listening on port 44131
+Read port: 44131
+console.error: ({})
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://cms.schrackforstudents.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://cms.schrackforstudents.com."
+JavaScript error: https://cms.schrackforstudents.com/_Resources/Static/Packages/Neos.Neos.Ui/Plugins/ckeditor/ckeditor.js, line 356: TypeError: a is undefined
+JavaScript warning: https://cms.schrackforstudents.com/_Resources/Static/Packages/Neos.Twitter.Bootstrap/Libraries/jQuery/jquery-1.10.1.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+1741947906273	Marionette	INFO	Stopped listening on port 44131
