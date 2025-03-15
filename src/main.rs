@@ -1,39 +1,69 @@
-use crossterm::event::{read, Event, KeyCode};
+use crossterm::event::{read, Event, KeyCode, KeyEvent};
 use csv::Reader;
-use json::parse;
-use once_cell::sync::Lazy;
+use json::object::Iter;
+use json::JsonValue;
 use std::collections::HashMap;
+use std::error::Error;
 use std::fs;
-use std::io::Error;
 use std::time::Duration;
 use thirtyfour::prelude::*;
 
 static URL: &str = "https://cms.schrackforstudents.com/neos/login";
 static TAGPATH: &str = concat!(env!("CARGO_MANIFEST_DIR"), "/resources/tags.csv");
-static CREDENTIALS: JsonValue =
-    json::parse(fs::read_to_string("/run/secrets/cms-pswd").unwrap_or_else());
 
-async fn login(driver: &WebDriver) -> WebDriverResult<()> {
+pub async fn login(driver: &WebDriver) -> WebDriverResult<()> {
+    // Read the secret file
+    let secret_content = match fs::read_to_string("/run/secrets/cms-pswd") {
+        Ok(content) => content,
+        Err(_) => {
+            println!("Notice: No secret file found. Please type in credentials manually.");
+            return Ok(()); // Stop execution as we can't proceed without credentials
+        }
+    };
+
+    // Parse the secret JSON
+    let parsed_secret = json::parse(&secret_content).unwrap_or(JsonValue::Null);
+
+    // Extract username
+    let username = match parsed_secret["username"].as_str() {
+        Some(name) => name.to_string(),
+        None => {
+            println!("Notice: No username found in the secret file.");
+            return Ok(()); // Stop execution as we need a username
+        }
+    };
+
+    // Extract password
+    let password = match parsed_secret["password"].as_str() {
+        Some(pass) => pass.to_string(),
+        None => {
+            println!("Notice: No password found in the secret file.");
+            return Ok(()); // Stop execution as we need a password
+        }
+    };
+
+    // Find the login elements
     let username_field = driver.find(By::Id("username")).await?;
-
     let password_field = driver.find(By::Id("password")).await?;
-
     let login_button = driver.find(By::ClassName("neos-login-btn")).await?;
 
+    // Perform the login action
     driver
         .action_chain()
         .click_element(&username_field)
-        .send_keys(USERNAME)
+        .send_keys(&username)
         .click_element(&password_field)
-        .send_keys(PASSWORD.to_string())
+        .send_keys(&password)
         .click_element(&login_button)
         .perform()
         .await?;
 
+    println!("Login attempt completed.");
+
     Ok(())
 }
 
-fn load_csv_data(path: &str) -> Result<HashMap<String, String>, Error> {
+fn load_csv_data(path: &str) -> Result<HashMap<String, String>, Box<dyn Error>> {
     let mut tags: HashMap<String, String> = HashMap::new();
     let mut reader = Reader::from_path(path)?;
 
@@ -92,7 +122,7 @@ async fn extract_content(driver: &WebDriver) -> WebDriverResult<()> {
 }
 
 async fn add_tags(clear: bool, driver: &WebDriver) -> WebDriverResult<()> {
-    let tags = load_csv_data(TAGPATH)?;
+    let tags = load_csv_data(TAGPATH).unwrap();
 
     let iframe = driver
         .query(By::Css(r#"iframe[name="neos-content-main"]"#))
@@ -166,6 +196,20 @@ async fn add_tags(clear: bool, driver: &WebDriver) -> WebDriverResult<()> {
     Ok(())
 }
 
+async fn list_tree(driver: &WebDriver) -> WebDriverResult<()> {
+    let filetree = driver.find(By::Css(".style__pageTree___1vfOV")).await?;
+
+    let tree_items = filetree.find_all(By::Css("[role='treeitem']")).await?;
+
+    println!("{length}", length = tree_items.len());
+    for item in tree_items {
+        let text = item.text().await?;
+        println!("Tree item: {}", text);
+    }
+
+    Ok(())
+}
+
 #[tokio::main]
 async fn main() -> WebDriverResult<()> {
     let caps = DesiredCapabilities::firefox();
@@ -176,20 +220,20 @@ async fn main() -> WebDriverResult<()> {
 
     login(&driver).await?;
 
-    let books_collapse_selector = ".style__pageTree___1vfOV > div:nth-child(1) > div:nth-child(1) > div:nth-child(3) > div:nth-child(7) > div:nth-child(3) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > a:nth-child(3) > svg:nth-child(1)".to_string();
+    // let books_collapse_selector = ".style__pageTree___1vfOV > div:nth-child(1) > div:nth-child(1) > div:nth-child(3) > div:nth-child(7) > div:nth-child(3) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > a:nth-child(3) > svg:nth-child(1)".to_string();
 
-    collapse_tree_item(&driver, &books_collapse_selector).await?;
+    // collapse_tree_item(&driver, &books_collapse_selector).await?;
 
-    let welcome_message = r#"
-    Welcome to the tag spider you can do the following actions by pressing the given keys
+    // let welcome_message = r#"
+    // Welcome to the tag spider you can do the following actions by pressing the given keys
 
-    q -> quit the program
-    a -> add tags (must be in question answer environment) 
-    c -> clear tags (must be in question answer environment)
-    e -> extract the full source (this is a test)
-    "#;
+    // q -> quit the program
+    // a -> add tags (must be in question answer environment)
+    // c -> clear tags (must be in question answer environment)
+    // e -> extract the full source (this is a test)
+    // "#;
 
-    println!("{}", welcome_message);
+    // println!("{}", welcome_message);
 
     loop {
         if let Event::Key(event) = read().unwrap() {
@@ -197,7 +241,7 @@ async fn main() -> WebDriverResult<()> {
                 KeyCode::Char('q') => break,
                 KeyCode::Char('a') => add_tags(false, &driver).await?,
                 KeyCode::Char('c') => add_tags(true, &driver).await?,
-                KeyCode::Char('e') => extract_content(&driver).await?,
+                KeyCode::Char('e') => list_tree(&driver).await?,
                 _ => {}
             }
         }
