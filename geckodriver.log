@@ -1,0 +1,522 @@
+1741993144164	geckodriver	INFO	Listening on 127.0.0.1:4444
+1741993163536	mozrunner::runner	INFO	Running command: MOZ_CRASHREPORTER="1" MOZ_CRASHREPORTER_NO_REPORT="1" MOZ_CRASHREPORTER_SHUTDOWN="1" "/nix/store/7psrwkv3nsi ... f49795abn71y9-firefox-136.0/bin/firefox" "--marionette" "-no-remote" "-profile" "/tmp/nix-shell.G2HXBz/rust_mozprofilelvcnUM"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1741993163937	Marionette	INFO	Marionette enabled
+1741993164105	Marionette	INFO	Listening on port 34801
+Read port: 34801
+console.error: ({})
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://cms.schrackforstudents.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://cms.schrackforstudents.com."
+JavaScript error: https://cms.schrackforstudents.com/_Resources/Static/Packages/Neos.Neos.Ui/Plugins/ckeditor/ckeditor.js, line 356: TypeError: a is undefined
+JavaScript warning: https://cms.schrackforstudents.com/_Resources/Static/Packages/Neos.Twitter.Bootstrap/Libraries/jQuery/jquery-1.10.1.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+1741993262787	Marionette	INFO	Stopped listening on port 34801
+JavaScript error: resource://gre/modules/Sqlite.sys.mjs, line 1296: Error: Sqlite.sys.mjs has been shutdown. Cannot open connection to: /tmp/nix-shell.G2HXBz/rust_mozprofilelvcnUM/protections.sqlite
+1741993273926	mozrunner::runner	INFO	Running command: MOZ_CRASHREPORTER="1" MOZ_CRASHREPORTER_NO_REPORT="1" MOZ_CRASHREPORTER_SHUTDOWN="1" "/nix/store/7psrwkv3nsi ... f49795abn71y9-firefox-136.0/bin/firefox" "--marionette" "-no-remote" "-profile" "/tmp/nix-shell.G2HXBz/rust_mozprofilemwi4zu"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1741993274340	Marionette	INFO	Marionette enabled
+1741993274497	Marionette	INFO	Listening on port 38841
+Read port: 38841
+console.error: ({})
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://cms.schrackforstudents.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://cms.schrackforstudents.com."
+JavaScript error: https://cms.schrackforstudents.com/_Resources/Static/Packages/Neos.Neos.Ui/Plugins/ckeditor/ckeditor.js, line 356: TypeError: a is undefined
+JavaScript warning: https://cms.schrackforstudents.com/_Resources/Static/Packages/Neos.Twitter.Bootstrap/Libraries/jQuery/jquery-1.10.1.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+1741993338415	Marionette	INFO	Stopped listening on port 38841
+JavaScript error: resource://gre/modules/Sqlite.sys.mjs, line 1296: Error: Sqlite.sys.mjs has been shutdown. Cannot open connection to: /tmp/nix-shell.G2HXBz/rust_mozprofilemwi4zu/protections.sqlite
+1741993374137	mozrunner::runner	INFO	Running command: MOZ_CRASHREPORTER="1" MOZ_CRASHREPORTER_NO_REPORT="1" MOZ_CRASHREPORTER_SHUTDOWN="1" "/nix/store/7psrwkv3nsi ... f49795abn71y9-firefox-136.0/bin/firefox" "--marionette" "-no-remote" "-profile" "/tmp/nix-shell.G2HXBz/rust_mozprofileUKZufJ"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1741993374541	Marionette	INFO	Marionette enabled
+1741993374697	Marionette	INFO	Listening on port 38389
+Read port: 38389
+console.error: ({})
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://cms.schrackforstudents.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://cms.schrackforstudents.com."
+JavaScript error: https://cms.schrackforstudents.com/_Resources/Static/Packages/Neos.Neos.Ui/Plugins/ckeditor/ckeditor.js, line 356: TypeError: a is undefined
+JavaScript warning: https://cms.schrackforstudents.com/_Resources/Static/Packages/Neos.Twitter.Bootstrap/Libraries/jQuery/jquery-1.10.1.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+1741993437341	Marionette	INFO	Stopped listening on port 38389
+JavaScript error: resource://gre/modules/Sqlite.sys.mjs, line 1296: Error: Sqlite.sys.mjs has been shutdown. Cannot open connection to: /tmp/nix-shell.G2HXBz/rust_mozprofileUKZufJ/protections.sqlite
+1741993449641	mozrunner::runner	INFO	Running command: MOZ_CRASHREPORTER="1" MOZ_CRASHREPORTER_NO_REPORT="1" MOZ_CRASHREPORTER_SHUTDOWN="1" "/nix/store/7psrwkv3nsi ... f49795abn71y9-firefox-136.0/bin/firefox" "--marionette" "-no-remote" "-profile" "/tmp/nix-shell.G2HXBz/rust_mozprofileo8LWof"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1741993450062	Marionette	INFO	Marionette enabled
+1741993450234	Marionette	INFO	Listening on port 35579
+Read port: 35579
+console.error: ({})
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://cms.schrackforstudents.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://cms.schrackforstudents.com."
+JavaScript error: https://cms.schrackforstudents.com/_Resources/Static/Packages/Neos.Neos.Ui/Plugins/ckeditor/ckeditor.js, line 356: TypeError: a is undefined
+JavaScript warning: https://cms.schrackforstudents.com/_Resources/Static/Packages/Neos.Twitter.Bootstrap/Libraries/jQuery/jquery-1.10.1.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+console.warn: "Listener for event 'frame' did not return a promise."
+JavaScript error: https://cms.schrackforstudents.com/_Resources/Static/Packages/Neos.Neos.Ui/Plugins/ckeditor/ckeditor.js, line 356: TypeError: a is undefined
+JavaScript error: https://cms.schrackforstudents.com/_Resources/Static/Packages/Neos.Neos.Ui/Plugins/ckeditor/ckeditor.js, line 356: TypeError: a is undefined
+JavaScript error: https://cms.schrackforstudents.com/_Resources/Static/Packages/Neos.Neos.Ui/Plugins/ckeditor/ckeditor.js, line 356: TypeError: a is undefined
+JavaScript error: https://cms.schrackforstudents.com/_Resources/Static/Packages/Neos.Neos.Ui/Plugins/ckeditor/ckeditor.js, line 356: TypeError: a is undefined
+JavaScript error: https://cms.schrackforstudents.com/_Resources/Static/Packages/Neos.Neos.Ui/Plugins/ckeditor/ckeditor.js, line 356: TypeError: a is undefined
+JavaScript error: https://cms.schrackforstudents.com/_Resources/Static/Packages/Neos.Neos.Ui/Plugins/ckeditor/ckeditor.js, line 356: TypeError: a is undefined
+JavaScript error: https://cms.schrackforstudents.com/_Resources/Static/Packages/Neos.Neos.Ui/Plugins/ckeditor/ckeditor.js, line 356: TypeError: a is undefined
+JavaScript error: https://cms.schrackforstudents.com/_Resources/Static/Packages/Neos.Neos.Ui/Plugins/ckeditor/ckeditor.js, line 356: TypeError: a is undefined
+JavaScript error: https://cms.schrackforstudents.com/_Resources/Static/Packages/Neos.Neos.Ui/Plugins/ckeditor/ckeditor.js, line 356: TypeError: a is undefined
+JavaScript error: https://cms.schrackforstudents.com/_Resources/Static/Packages/Neos.Neos.Ui/Plugins/ckeditor/ckeditor.js, line 356: TypeError: a is undefined
+JavaScript error: https://cms.schrackforstudents.com/_Resources/Static/Packages/Neos.Neos.Ui/Plugins/ckeditor/ckeditor.js, line 356: TypeError: a is undefined
+JavaScript error: https://cms.schrackforstudents.com/_Resources/Static/Packages/Neos.Neos.Ui/Plugins/ckeditor/ckeditor.js, line 356: TypeError: a is undefined
+JavaScript error: https://cms.schrackforstudents.com/_Resources/Static/Packages/Neos.Neos.Ui/Plugins/ckeditor/ckeditor.js, line 356: TypeError: a is undefined
+console.warn: "Listener for event 'frame' did not return a promise."
+JavaScript error: https://cms.schrackforstudents.com/_Resources/Static/Packages/Neos.Neos.Ui/Plugins/ckeditor/ckeditor.js, line 356: TypeError: a is undefined
+JavaScript warning: https://cms.schrackforstudents.com/_Resources/Static/Packages/Neos.Twitter.Bootstrap/Libraries/jQuery/jquery-1.10.1.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+console.warn: "Listener for event 'frame' did not return a promise."
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js, line 4696: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js, line 4696: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js, line 4696: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js, line 4696: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js, line 4696: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js, line 4696: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js, line 4696: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval, line 4696: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval, line 4696: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval, line 4696: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval, line 4696: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval, line 4696: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval line 4696 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval line 4696 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval line 4696 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval line 4696 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval line 4696 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval line 4696 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval line 4696 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval, line 4696: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval line 4696 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval line 4696 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval line 4696 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval line 4696 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval line 4696 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval line 4696 > eval line 1 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval line 4696 > eval line 1 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval line 4696 > eval line 1 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval line 4696 > eval line 1 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js, line 2734: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js, line 2734: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js, line 2734: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js, line 2734: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js, line 2734: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js, line 2734: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js, line 2734: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval line 4696 > eval line 1 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval, line 2734: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval, line 2734: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval, line 2734: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval, line 2734: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval, line 2734: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval line 2734 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval line 2734 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval line 2734 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval line 2734 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval, line 2734: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval line 2734 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval line 2734 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval line 2734 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval line 2734 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval line 2734 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval line 2734 > eval line 1 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval line 2734 > eval line 1 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval line 2734 > eval line 1 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval line 2734 > eval line 1 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval line 2734 > eval line 1 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/pCgitIoRpv8?wmode=transparent line 867 > injectedScript, line 4732: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/pCgitIoRpv8?wmode=transparent line 867 > injectedScript, line 4732: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/pCgitIoRpv8?wmode=transparent line 867 > injectedScript, line 4732: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/pCgitIoRpv8?wmode=transparent line 867 > injectedScript, line 4732: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/pCgitIoRpv8?wmode=transparent line 867 > injectedScript, line 4732: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/pCgitIoRpv8?wmode=transparent line 867 > injectedScript, line 4732: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/pCgitIoRpv8?wmode=transparent line 867 > injectedScript, line 4732: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/pCgitIoRpv8?wmode=transparent line 867 > injectedScript line 2 > eval, line 4732: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/pCgitIoRpv8?wmode=transparent line 867 > injectedScript line 2 > eval, line 4732: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/pCgitIoRpv8?wmode=transparent line 867 > injectedScript line 2 > eval, line 4732: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/pCgitIoRpv8?wmode=transparent line 867 > injectedScript line 2 > eval, line 4732: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/pCgitIoRpv8?wmode=transparent line 867 > injectedScript line 2 > eval, line 4732: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/pCgitIoRpv8?wmode=transparent line 867 > injectedScript line 2 > eval line 4732 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/pCgitIoRpv8?wmode=transparent line 867 > injectedScript line 2 > eval line 4732 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/pCgitIoRpv8?wmode=transparent line 867 > injectedScript line 2 > eval line 4732 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/pCgitIoRpv8?wmode=transparent line 867 > injectedScript line 2 > eval line 4732 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/pCgitIoRpv8?wmode=transparent line 867 > injectedScript line 2 > eval line 4732 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/pCgitIoRpv8?wmode=transparent line 867 > injectedScript line 2 > eval line 4732 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/pCgitIoRpv8?wmode=transparent line 867 > injectedScript line 2 > eval line 4732 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/pCgitIoRpv8?wmode=transparent line 867 > injectedScript line 2 > eval line 4732 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/pCgitIoRpv8?wmode=transparent line 867 > injectedScript line 2 > eval, line 4732: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/pCgitIoRpv8?wmode=transparent line 867 > injectedScript line 2 > eval line 4732 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/pCgitIoRpv8?wmode=transparent line 867 > injectedScript line 2 > eval line 4732 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/pCgitIoRpv8?wmode=transparent line 867 > injectedScript line 2 > eval line 4732 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/pCgitIoRpv8?wmode=transparent line 867 > injectedScript line 2 > eval line 4732 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/pCgitIoRpv8?wmode=transparent line 867 > injectedScript line 2 > eval line 4732 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/pCgitIoRpv8?wmode=transparent line 867 > injectedScript line 2 > eval line 4732 > eval line 1 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/pCgitIoRpv8?wmode=transparent line 867 > injectedScript line 2 > eval line 4732 > eval line 1 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/pCgitIoRpv8?wmode=transparent line 867 > injectedScript line 2 > eval line 4732 > eval line 1 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/pCgitIoRpv8?wmode=transparent line 867 > injectedScript line 2 > eval line 4732 > eval line 1 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/pCgitIoRpv8?wmode=transparent line 867 > injectedScript line 2 > eval line 4732 > eval line 1 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/59-4Auu8mxM?wmode=transparent line 867 > injectedScript, line 7159: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/59-4Auu8mxM?wmode=transparent line 867 > injectedScript, line 7159: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/59-4Auu8mxM?wmode=transparent line 867 > injectedScript, line 7159: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/59-4Auu8mxM?wmode=transparent line 867 > injectedScript, line 7159: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/59-4Auu8mxM?wmode=transparent line 867 > injectedScript, line 7159: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/59-4Auu8mxM?wmode=transparent line 867 > injectedScript, line 7159: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/59-4Auu8mxM?wmode=transparent line 867 > injectedScript, line 7159: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/59-4Auu8mxM?wmode=transparent line 867 > injectedScript line 2 > eval, line 7159: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/59-4Auu8mxM?wmode=transparent line 867 > injectedScript line 2 > eval, line 7159: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/59-4Auu8mxM?wmode=transparent line 867 > injectedScript line 2 > eval, line 7159: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/59-4Auu8mxM?wmode=transparent line 867 > injectedScript line 2 > eval, line 7159: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/59-4Auu8mxM?wmode=transparent line 867 > injectedScript line 2 > eval, line 7159: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/59-4Auu8mxM?wmode=transparent line 867 > injectedScript line 2 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/59-4Auu8mxM?wmode=transparent line 867 > injectedScript line 2 > eval line 7159 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/59-4Auu8mxM?wmode=transparent line 867 > injectedScript line 2 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/59-4Auu8mxM?wmode=transparent line 867 > injectedScript line 2 > eval line 7159 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/59-4Auu8mxM?wmode=transparent line 867 > injectedScript line 2 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/59-4Auu8mxM?wmode=transparent line 867 > injectedScript line 2 > eval line 7159 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/59-4Auu8mxM?wmode=transparent line 867 > injectedScript line 2 > eval line 7159 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/59-4Auu8mxM?wmode=transparent line 867 > injectedScript line 2 > eval line 7159 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/59-4Auu8mxM?wmode=transparent line 867 > injectedScript line 2 > eval, line 7159: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/59-4Auu8mxM?wmode=transparent line 867 > injectedScript line 2 > eval line 7159 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/59-4Auu8mxM?wmode=transparent line 867 > injectedScript line 2 > eval line 7159 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/59-4Auu8mxM?wmode=transparent line 867 > injectedScript line 2 > eval line 7159 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/59-4Auu8mxM?wmode=transparent line 867 > injectedScript line 2 > eval line 7159 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/59-4Auu8mxM?wmode=transparent line 867 > injectedScript line 2 > eval line 7159 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/59-4Auu8mxM?wmode=transparent line 867 > injectedScript line 2 > eval line 7159 > eval line 1 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/59-4Auu8mxM?wmode=transparent line 867 > injectedScript line 2 > eval line 7159 > eval line 1 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/59-4Auu8mxM?wmode=transparent line 867 > injectedScript line 2 > eval line 7159 > eval line 1 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/59-4Auu8mxM?wmode=transparent line 867 > injectedScript line 2 > eval line 7159 > eval line 1 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/59-4Auu8mxM?wmode=transparent line 867 > injectedScript line 2 > eval line 7159 > eval line 1 > eval line 1 > eval, line 1: unreachable code after return statement
+console.warn: "Listener for event 'frame' did not return a promise."
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval line 2734 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+console.error: "Unable to find target with innerWindowId:15032385537"
+console.error: "Unable to find target with innerWindowId:15032385537"
+console.error: "Unable to find target with innerWindowId:15032385537"
+console.error: "Unable to find target with innerWindowId:15032385537"
+JavaScript error: https://cms.schrackforstudents.com/_Resources/Static/Packages/Neos.Neos.Ui/Plugins/ckeditor/ckeditor.js, line 356: TypeError: a is undefined
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval line 4696 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript error: https://cms.schrackforstudents.com/_Resources/Static/Packages/Neos.Neos.Ui/Plugins/ckeditor/ckeditor.js, line 356: TypeError: a is undefined
+console.error: "Unable to find target with innerWindowId:15032385538"
+console.error: "Unable to find target with innerWindowId:15032385538"
+console.error: "Unable to find target with innerWindowId:15032385538"
+JavaScript error: https://cms.schrackforstudents.com/_Resources/Static/Packages/Neos.Neos.Ui/Plugins/ckeditor/ckeditor.js, line 356: TypeError: a is undefined
+JavaScript error: https://cms.schrackforstudents.com/_Resources/Static/Packages/Neos.Neos.Ui/Plugins/ckeditor/ckeditor.js, line 356: TypeError: a is undefined
+JavaScript error: https://cms.schrackforstudents.com/_Resources/Static/Packages/Neos.Neos.Ui/Plugins/ckeditor/ckeditor.js, line 356: TypeError: a is undefined
+JavaScript error: https://cms.schrackforstudents.com/_Resources/Static/Packages/Neos.Neos.Ui/Plugins/ckeditor/ckeditor.js, line 356: TypeError: a is undefined
+JavaScript error: https://cms.schrackforstudents.com/_Resources/Static/Packages/Neos.Neos.Ui/Plugins/ckeditor/ckeditor.js, line 356: TypeError: a is undefined
+JavaScript error: https://cms.schrackforstudents.com/_Resources/Static/Packages/Neos.Neos.Ui/Plugins/ckeditor/ckeditor.js, line 356: TypeError: a is undefined
+console.warn: "Listener for event 'frame' did not return a promise."
+JavaScript error: https://cms.schrackforstudents.com/_Resources/Static/Packages/Neos.Neos.Ui/Plugins/ckeditor/ckeditor.js, line 356: TypeError: a is undefined
+JavaScript warning: https://cms.schrackforstudents.com/_Resources/Static/Packages/Neos.Twitter.Bootstrap/Libraries/jQuery/jquery-1.10.1.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js, line 6138: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js, line 6138: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js, line 6138: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js, line 6138: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js, line 6138: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js, line 6138: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js, line 6138: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval, line 6138: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval, line 6138: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval, line 6138: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval, line 6138: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval, line 6138: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval line 6138 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval line 6138 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval line 6138 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval line 6138 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval line 6138 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval line 6138 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval line 6138 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval line 6138 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval, line 6138: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval line 6138 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval line 6138 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval line 6138 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval line 6138 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval line 6138 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval line 6138 > eval line 1 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval line 6138 > eval line 1 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval line 6138 > eval line 1 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval line 6138 > eval line 1 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval line 6138 > eval line 1 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/zaigRX4M1KU?wmode=transparent line 867 > injectedScript, line 1484: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/zaigRX4M1KU?wmode=transparent line 867 > injectedScript, line 1484: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/zaigRX4M1KU?wmode=transparent line 867 > injectedScript, line 1484: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/zaigRX4M1KU?wmode=transparent line 867 > injectedScript, line 1484: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/zaigRX4M1KU?wmode=transparent line 867 > injectedScript, line 1484: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/zaigRX4M1KU?wmode=transparent line 867 > injectedScript, line 1484: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/zaigRX4M1KU?wmode=transparent line 867 > injectedScript, line 1484: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/zaigRX4M1KU?wmode=transparent line 867 > injectedScript line 2 > eval, line 1484: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/zaigRX4M1KU?wmode=transparent line 867 > injectedScript line 2 > eval, line 1484: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/zaigRX4M1KU?wmode=transparent line 867 > injectedScript line 2 > eval, line 1484: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/zaigRX4M1KU?wmode=transparent line 867 > injectedScript line 2 > eval, line 1484: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/zaigRX4M1KU?wmode=transparent line 867 > injectedScript line 2 > eval, line 1484: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/zaigRX4M1KU?wmode=transparent line 867 > injectedScript line 2 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/zaigRX4M1KU?wmode=transparent line 867 > injectedScript line 2 > eval line 1484 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/zaigRX4M1KU?wmode=transparent line 867 > injectedScript line 2 > eval line 1484 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/zaigRX4M1KU?wmode=transparent line 867 > injectedScript line 2 > eval line 1484 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/zaigRX4M1KU?wmode=transparent line 867 > injectedScript line 2 > eval line 1484 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/zaigRX4M1KU?wmode=transparent line 867 > injectedScript line 2 > eval line 1484 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/zaigRX4M1KU?wmode=transparent line 867 > injectedScript line 2 > eval line 1484 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/zaigRX4M1KU?wmode=transparent line 867 > injectedScript line 2 > eval line 1484 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/zaigRX4M1KU?wmode=transparent line 867 > injectedScript line 2 > eval, line 1484: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/zaigRX4M1KU?wmode=transparent line 867 > injectedScript line 2 > eval line 1484 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/zaigRX4M1KU?wmode=transparent line 867 > injectedScript line 2 > eval line 1484 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/zaigRX4M1KU?wmode=transparent line 867 > injectedScript line 2 > eval line 1484 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/zaigRX4M1KU?wmode=transparent line 867 > injectedScript line 2 > eval line 1484 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/zaigRX4M1KU?wmode=transparent line 867 > injectedScript line 2 > eval line 1484 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/zaigRX4M1KU?wmode=transparent line 867 > injectedScript line 2 > eval line 1484 > eval line 1 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/zaigRX4M1KU?wmode=transparent line 867 > injectedScript line 2 > eval line 1484 > eval line 1 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/zaigRX4M1KU?wmode=transparent line 867 > injectedScript line 2 > eval line 1484 > eval line 1 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/zaigRX4M1KU?wmode=transparent line 867 > injectedScript line 2 > eval line 1484 > eval line 1 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/zaigRX4M1KU?wmode=transparent line 867 > injectedScript line 2 > eval line 1484 > eval line 1 > eval line 1 > eval, line 1: unreachable code after return statement
+console.warn: "Listener for event 'frame' did not return a promise."
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval line 6138 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+console.error: "Unable to find target with innerWindowId:17179869185"
+console.error: "Unable to find target with innerWindowId:17179869185"
+JavaScript error: https://cms.schrackforstudents.com/_Resources/Static/Packages/Neos.Neos.Ui/Plugins/ckeditor/ckeditor.js, line 356: TypeError: a is undefined
+JavaScript error: https://cms.schrackforstudents.com/_Resources/Static/Packages/Neos.Neos.Ui/Plugins/ckeditor/ckeditor.js, line 356: TypeError: a is undefined
+JavaScript error: https://cms.schrackforstudents.com/_Resources/Static/Packages/Neos.Neos.Ui/Plugins/ckeditor/ckeditor.js, line 356: TypeError: a is undefined
+JavaScript error: https://cms.schrackforstudents.com/_Resources/Static/Packages/Neos.Neos.Ui/Plugins/ckeditor/ckeditor.js, line 356: TypeError: a is undefined
+JavaScript error: https://cms.schrackforstudents.com/_Resources/Static/Packages/Neos.Neos.Ui/Plugins/ckeditor/ckeditor.js, line 356: TypeError: a is undefined
+JavaScript error: https://cms.schrackforstudents.com/_Resources/Static/Packages/Neos.Neos.Ui/Plugins/ckeditor/ckeditor.js, line 356: TypeError: a is undefined
+JavaScript error: https://cms.schrackforstudents.com/_Resources/Static/Packages/Neos.Neos.Ui/Plugins/ckeditor/ckeditor.js, line 356: TypeError: a is undefined
+JavaScript error: https://cms.schrackforstudents.com/_Resources/Static/Packages/Neos.Neos.Ui/Plugins/ckeditor/ckeditor.js, line 356: TypeError: a is undefined
+JavaScript warning: https://cms.schrackforstudents.com/_Resources/Static/Packages/Neos.Twitter.Bootstrap/Libraries/jQuery/jquery-1.10.1.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+console.warn: "Listener for event 'frame' did not return a promise."
+console.warn: "Listener for event 'frame' did not return a promise."
+console.warn: "Listener for event 'frame' did not return a promise."
+console.warn: "Listener for event 'frame' did not return a promise."
+console.warn: "Listener for event 'frame' did not return a promise."
+console.warn: "Listener for event 'frame' did not return a promise."
+console.warn: "Listener for event 'frame' did not return a promise."
+console.warn: "Listener for event 'frame' did not return a promise."
+console.warn: "Listener for event 'frame' did not return a promise."
+console.warn: "Listener for event 'frame' did not return a promise."
+console.warn: "Listener for event 'frame' did not return a promise."
+console.warn: "Listener for event 'frame' did not return a promise."
+console.warn: "Listener for event 'frame' did not return a promise."
+console.warn: "Listener for event 'frame' did not return a promise."
+console.warn: "Listener for event 'frame' did not return a promise."
+console.warn: "Listener for event 'frame' did not return a promise."
+console.warn: "Listener for event 'frame' did not return a promise."
+console.warn: "Listener for event 'frame' did not return a promise."
+console.warn: "Listener for event 'frame' did not return a promise."
+console.warn: "Listener for event 'frame' did not return a promise."
+console.warn: "Listener for event 'frame' did not return a promise."
+console.warn: "Listener for event 'frame' did not return a promise."
+console.warn: "Listener for event 'frame' did not return a promise."
+console.warn: "Listener for event 'frame' did not return a promise."
+console.warn: "Listener for event 'frame' did not return a promise."
+console.warn: "Listener for event 'frame' did not return a promise."
+console.warn: "Listener for event 'frame' did not return a promise."
+console.warn: "Listener for event 'frame' did not return a promise."
+console.warn: "Listener for event 'frame' did not return a promise."
+console.warn: "Listener for event 'frame' did not return a promise."
+console.warn: "Listener for event 'frame' did not return a promise."
+console.warn: "Listener for event 'frame' did not return a promise."
+console.warn: "Listener for event 'frame' did not return a promise."
+JavaScript error: https://cms.schrackforstudents.com/_Resources/Static/Packages/Neos.Neos.Ui/Plugins/ckeditor/ckeditor.js, line 356: TypeError: a is undefined
+JavaScript error: https://cms.schrackforstudents.com/_Resources/Static/Packages/Neos.Neos.Ui/Plugins/ckeditor/ckeditor.js, line 356: TypeError: a is undefined
+JavaScript error: https://cms.schrackforstudents.com/_Resources/Static/Packages/Neos.Neos.Ui/Plugins/ckeditor/ckeditor.js, line 356: TypeError: a is undefined
+JavaScript error: https://cms.schrackforstudents.com/_Resources/Static/Packages/Neos.Neos.Ui/Plugins/ckeditor/ckeditor.js, line 356: TypeError: a is undefined
+JavaScript error: https://cms.schrackforstudents.com/_Resources/Static/Packages/Neos.Neos.Ui/Plugins/ckeditor/ckeditor.js, line 356: TypeError: a is undefined
+JavaScript error: https://cms.schrackforstudents.com/_Resources/Static/Packages/Neos.Neos.Ui/Plugins/ckeditor/ckeditor.js, line 356: TypeError: a is undefined
+JavaScript error: https://cms.schrackforstudents.com/_Resources/Static/Packages/Neos.Neos.Ui/Plugins/ckeditor/ckeditor.js, line 356: TypeError: a is undefined
+JavaScript error: https://cms.schrackforstudents.com/_Resources/Static/Packages/Neos.Neos.Ui/Plugins/ckeditor/ckeditor.js, line 356: TypeError: a is undefined
+JavaScript error: https://cms.schrackforstudents.com/_Resources/Static/Packages/Neos.Neos.Ui/Plugins/ckeditor/ckeditor.js, line 356: TypeError: a is undefined
+JavaScript error: https://cms.schrackforstudents.com/_Resources/Static/Packages/Neos.Neos.Ui/Plugins/ckeditor/ckeditor.js, line 356: TypeError: a is undefined
+JavaScript error: https://cms.schrackforstudents.com/_Resources/Static/Packages/Neos.Neos.Ui/Plugins/ckeditor/ckeditor.js, line 356: TypeError: a is undefined
+JavaScript error: https://cms.schrackforstudents.com/_Resources/Static/Packages/Neos.Neos.Ui/Plugins/ckeditor/ckeditor.js, line 356: TypeError: a is undefined
+JavaScript error: https://cms.schrackforstudents.com/_Resources/Static/Packages/Neos.Neos.Ui/Plugins/ckeditor/ckeditor.js, line 356: TypeError: a is undefined
+JavaScript error: https://cms.schrackforstudents.com/_Resources/Static/Packages/Neos.Neos.Ui/Plugins/ckeditor/ckeditor.js, line 356: TypeError: a is undefined
+JavaScript error: https://cms.schrackforstudents.com/_Resources/Static/Packages/Neos.Neos.Ui/Plugins/ckeditor/ckeditor.js, line 356: TypeError: a is undefined
+JavaScript error: https://cms.schrackforstudents.com/_Resources/Static/Packages/Neos.Neos.Ui/Plugins/ckeditor/ckeditor.js, line 356: TypeError: a is undefined
+console.warn: "Listener for event 'frame' did not return a promise."
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js, line 6969: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js, line 6969: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js, line 6969: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js, line 6969: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js, line 6969: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js, line 6969: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js, line 6969: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval, line 6969: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval, line 6969: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval, line 6969: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval, line 6969: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval, line 6969: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval line 6969 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval line 6969 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval line 6969 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval line 6969 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval line 6969 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval, line 6969: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval line 6969 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval line 6969 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval line 6969 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval line 6969 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval line 6969 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval line 6969 > eval line 1 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval line 6969 > eval line 1 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval line 6969 > eval line 1 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval line 6969 > eval line 1 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/84HL979b-jA?wmode=transparent line 867 > injectedScript, line 6796: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/84HL979b-jA?wmode=transparent line 867 > injectedScript, line 6796: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/84HL979b-jA?wmode=transparent line 867 > injectedScript, line 6796: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/84HL979b-jA?wmode=transparent line 867 > injectedScript, line 6796: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/84HL979b-jA?wmode=transparent line 867 > injectedScript, line 6796: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/84HL979b-jA?wmode=transparent line 867 > injectedScript, line 6796: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/84HL979b-jA?wmode=transparent line 867 > injectedScript, line 6796: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/84HL979b-jA?wmode=transparent line 867 > injectedScript line 2 > eval, line 6796: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/84HL979b-jA?wmode=transparent line 867 > injectedScript line 2 > eval, line 6796: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/84HL979b-jA?wmode=transparent line 867 > injectedScript line 2 > eval, line 6796: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/84HL979b-jA?wmode=transparent line 867 > injectedScript line 2 > eval, line 6796: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/84HL979b-jA?wmode=transparent line 867 > injectedScript line 2 > eval, line 6796: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/84HL979b-jA?wmode=transparent line 867 > injectedScript line 2 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/84HL979b-jA?wmode=transparent line 867 > injectedScript line 2 > eval line 6796 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/84HL979b-jA?wmode=transparent line 867 > injectedScript line 2 > eval line 6796 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/84HL979b-jA?wmode=transparent line 867 > injectedScript line 2 > eval line 6796 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/84HL979b-jA?wmode=transparent line 867 > injectedScript line 2 > eval line 6796 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/84HL979b-jA?wmode=transparent line 867 > injectedScript line 2 > eval line 6796 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/84HL979b-jA?wmode=transparent line 867 > injectedScript line 2 > eval line 6796 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/84HL979b-jA?wmode=transparent line 867 > injectedScript line 2 > eval line 6796 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/84HL979b-jA?wmode=transparent line 867 > injectedScript line 2 > eval, line 6796: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/84HL979b-jA?wmode=transparent line 867 > injectedScript line 2 > eval line 6796 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/84HL979b-jA?wmode=transparent line 867 > injectedScript line 2 > eval line 6796 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/84HL979b-jA?wmode=transparent line 867 > injectedScript line 2 > eval line 6796 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/84HL979b-jA?wmode=transparent line 867 > injectedScript line 2 > eval line 6796 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/84HL979b-jA?wmode=transparent line 867 > injectedScript line 2 > eval line 6796 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/84HL979b-jA?wmode=transparent line 867 > injectedScript line 2 > eval line 6796 > eval line 1 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/84HL979b-jA?wmode=transparent line 867 > injectedScript line 2 > eval line 6796 > eval line 1 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/84HL979b-jA?wmode=transparent line 867 > injectedScript line 2 > eval line 6796 > eval line 1 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/84HL979b-jA?wmode=transparent line 867 > injectedScript line 2 > eval line 6796 > eval line 1 > eval line 1 > eval, line 1: unreachable code after return statement
+JavaScript warning: https://www.youtube.com/embed/84HL979b-jA?wmode=transparent line 867 > injectedScript line 2 > eval line 6796 > eval line 1 > eval line 1 > eval, line 1: unreachable code after return statement
+console.warn: "Listener for event 'frame' did not return a promise."
+console.warn: "Listener for event 'frame' did not return a promise."
+console.warn: "Listener for event 'frame' did not return a promise."
+console.warn: "Listener for event 'frame' did not return a promise."
+console.warn: "Listener for event 'frame' did not return a promise."
+console.warn: "Listener for event 'frame' did not return a promise."
+console.warn: "Listener for event 'frame' did not return a promise."
+console.warn: "Listener for event 'frame' did not return a promise."
+console.warn: "Listener for event 'frame' did not return a promise."
+console.warn: "Listener for event 'frame' did not return a promise."
+console.warn: "Listener for event 'frame' did not return a promise."
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval line 6969 > eval line 1 > eval line 1 > eval, line 1: unreachable code after return statement
+console.warn: "Listener for event 'frame' did not return a promise."
+console.warn: "Listener for event 'frame' did not return a promise."
+console.warn: "Listener for event 'frame' did not return a promise."
+console.warn: "Listener for event 'frame' did not return a promise."
+console.warn: "Listener for event 'frame' did not return a promise."
+console.warn: "Listener for event 'frame' did not return a promise."
+console.warn: "Listener for event 'frame' did not return a promise."
+console.warn: "Listener for event 'frame' did not return a promise."
+console.warn: "Listener for event 'frame' did not return a promise."
+console.warn: "Listener for event 'frame' did not return a promise."
+console.warn: "Listener for event 'frame' did not return a promise."
+console.warn: "Listener for event 'frame' did not return a promise."
+console.warn: "Listener for event 'frame' did not return a promise."
+console.warn: "Listener for event 'frame' did not return a promise."
+console.warn: "Listener for event 'frame' did not return a promise."
+console.warn: "Listener for event 'frame' did not return a promise."
+console.warn: "Listener for event 'frame' did not return a promise."
+console.warn: "Listener for event 'frame' did not return a promise."
+console.warn: "Listener for event 'frame' did not return a promise."
+console.warn: "Listener for event 'frame' did not return a promise."
+console.warn: "Listener for event 'frame' did not return a promise."
+1741993558116	Marionette	INFO	Stopped listening on port 35579
+JavaScript error: , line 0: NotFoundError: No such JSProcessActor 'DevToolsProcess'
+JavaScript error: , line 0: NotFoundError: No such JSProcessActor 'DevToolsProcess'
+JavaScript error: , line 0: NotFoundError: No such JSProcessActor 'DevToolsProcess'
+JavaScript error: , line 0: NotFoundError: No such JSProcessActor 'DevToolsProcess'
+JavaScript error: , line 0: NotFoundError: No such JSProcessActor 'DevToolsProcess'
+JavaScript error: , line 0: NotFoundError: No such JSProcessActor 'DevToolsProcess'
+JavaScript error: , line 0: NotFoundError: No such JSProcessActor 'DevToolsProcess'
+JavaScript error: , line 0: NotFoundError: No such JSProcessActor 'DevToolsProcess'
+JavaScript error: , line 0: NotFoundError: No such JSProcessActor 'DevToolsProcess'
+JavaScript error: , line 0: NotFoundError: No such JSProcessActor 'DevToolsProcess'
+JavaScript error: , line 0: NotFoundError: No such JSProcessActor 'DevToolsProcess'
+JavaScript error: , line 0: NotFoundError: No such JSProcessActor 'DevToolsProcess'
+JavaScript error: , line 0: NotFoundError: No such JSProcessActor 'DevToolsProcess'
+JavaScript error: , line 0: NotFoundError: No such JSProcessActor 'DevToolsProcess'
+JavaScript error: , line 0: NotFoundError: No such JSProcessActor 'DevToolsProcess'
+JavaScript error: , line 0: NotFoundError: No such JSProcessActor 'DevToolsProcess'
+JavaScript error: , line 0: NotFoundError: No such JSProcessActor 'DevToolsProcess'
+JavaScript error: , line 0: NotFoundError: No such JSProcessActor 'DevToolsProcess'
+JavaScript error: , line 0: NotFoundError: No such JSProcessActor 'DevToolsProcess'
+JavaScript error: , line 0: NotFoundError: No such JSProcessActor 'DevToolsProcess'
+JavaScript error: , line 0: NotFoundError: No such JSProcessActor 'DevToolsProcess'
+JavaScript error: , line 0: NotFoundError: No such JSProcessActor 'DevToolsProcess'
+JavaScript error: , line 0: NotFoundError: No such JSProcessActor 'DevToolsProcess'
+JavaScript error: , line 0: NotFoundError: No such JSProcessActor 'DevToolsProcess'
+JavaScript error: , line 0: NotFoundError: No such JSProcessActor 'DevToolsProcess'
+JavaScript error: , line 0: NotFoundError: No such JSProcessActor 'DevToolsProcess'
+JavaScript error: , line 0: NotFoundError: No such JSProcessActor 'DevToolsProcess'
+JavaScript error: , line 0: NotFoundError: No such JSProcessActor 'DevToolsProcess'
+JavaScript error: , line 0: NotFoundError: No such JSProcessActor 'DevToolsProcess'
+JavaScript error: , line 0: NotFoundError: No such JSProcessActor 'DevToolsProcess'
+JavaScript error: , line 0: NotFoundError: No such JSProcessActor 'DevToolsProcess'
+JavaScript error: , line 0: NotFoundError: No such JSProcessActor 'DevToolsProcess'
+JavaScript error: , line 0: NotFoundError: No such JSProcessActor 'DevToolsProcess'
+JavaScript error: , line 0: NotFoundError: No such JSProcessActor 'DevToolsProcess'
+JavaScript error: , line 0: NotFoundError: No such JSProcessActor 'DevToolsProcess'
+JavaScript error: , line 0: NotFoundError: No such JSProcessActor 'DevToolsProcess'
+JavaScript error: , line 0: NotFoundError: No such JSProcessActor 'DevToolsProcess'
+JavaScript error: , line 0: NotFoundError: No such JSProcessActor 'DevToolsProcess'
+JavaScript error: , line 0: NotFoundError: No such JSProcessActor 'DevToolsProcess'
+JavaScript error: , line 0: NotFoundError: No such JSProcessActor 'DevToolsProcess'
+JavaScript error: , line 0: NotFoundError: No such JSProcessActor 'DevToolsProcess'
+JavaScript error: , line 0: NotFoundError: No such JSProcessActor 'DevToolsProcess'
+JavaScript error: , line 0: NotFoundError: No such JSProcessActor 'DevToolsProcess'
+JavaScript error: , line 0: NotFoundError: No such JSProcessActor 'DevToolsProcess'
+JavaScript error: , line 0: NotFoundError: No such JSProcessActor 'DevToolsProcess'
+JavaScript error: , line 0: NotFoundError: No such JSProcessActor 'DevToolsProcess'
+JavaScript error: , line 0: NotFoundError: No such JSProcessActor 'DevToolsProcess'
+JavaScript error: , line 0: NotFoundError: No such JSProcessActor 'DevToolsProcess'
+JavaScript error: , line 0: NotFoundError: No such JSProcessActor 'DevToolsProcess'
+JavaScript error: , line 0: NotFoundError: No such JSProcessActor 'DevToolsProcess'
+JavaScript error: , line 0: NotFoundError: No such JSProcessActor 'DevToolsProcess'
+JavaScript error: , line 0: NotFoundError: No such JSProcessActor 'DevToolsProcess'
+JavaScript error: , line 0: NotFoundError: No such JSProcessActor 'DevToolsProcess'
+JavaScript error: , line 0: NotFoundError: No such JSProcessActor 'DevToolsProcess'
+JavaScript error: , line 0: NotFoundError: No such JSProcessActor 'DevToolsProcess'
+JavaScript error: , line 0: NotFoundError: No such JSProcessActor 'DevToolsProcess'
+JavaScript error: , line 0: NotFoundError: No such JSProcessActor 'DevToolsProcess'
+JavaScript error: , line 0: NotFoundError: No such JSProcessActor 'DevToolsProcess'
+JavaScript error: , line 0: NotFoundError: No such JSProcessActor 'DevToolsProcess'
+JavaScript error: , line 0: NotFoundError: No such JSProcessActor 'DevToolsProcess'
+JavaScript error: , line 0: NotFoundError: No such JSProcessActor 'DevToolsProcess'
+JavaScript error: , line 0: NotFoundError: No such JSProcessActor 'DevToolsProcess'
+JavaScript error: , line 0: NotFoundError: No such JSProcessActor 'DevToolsProcess'
+JavaScript error: , line 0: NotFoundError: No such JSProcessActor 'DevToolsProcess'
+JavaScript error: , line 0: NotFoundError: No such JSProcessActor 'DevToolsProcess'
+JavaScript error: , line 0: NotFoundError: No such JSProcessActor 'DevToolsProcess'
+console.error: "Error in worker resource://devtools/client/shared/source-map-loader/worker.js" ": "
+JavaScript error: , line 0: NotFoundError: No such JSProcessActor 'DevToolsProcess'
+JavaScript error: , line 0: NotFoundError: No such JSProcessActor 'DevToolsProcess'
+JavaScript error: , line 0: NotFoundError: No such JSProcessActor 'DevToolsProcess'
+JavaScript error: resource://gre/modules/AsyncShutdown.sys.mjs, line 569: NotFoundError: No such JSProcessActor 'DevToolsProcess'
+JavaScript error: resource://gre/modules/AsyncShutdown.sys.mjs, line 569: NotFoundError: No such JSProcessActor 'DevToolsProcess'
+JavaScript error: resource://gre/modules/AsyncShutdown.sys.mjs, line 569: NotFoundError: No such JSProcessActor 'DevToolsProcess'
+JavaScript warning: https://www.google.com/js/th/b_TtUoPk4pD1jwQcntuo2baylTCTVtlGTDXLPkXoRUg.js line 2 > eval line 6969 > eval line 1 > eval line 1 > eval, line 1: Failed to create WebGL context: !CanvasManagerChild::Get()
+JavaScript error: resource://gre/modules/Sqlite.sys.mjs, line 1296: Error: Sqlite.sys.mjs has been shutdown. Cannot open connection to: /tmp/nix-shell.G2HXBz/rust_mozprofileo8LWof/protections.sqlite
+1741993634148	mozrunner::runner	INFO	Running command: MOZ_CRASHREPORTER="1" MOZ_CRASHREPORTER_NO_REPORT="1" MOZ_CRASHREPORTER_SHUTDOWN="1" "/nix/store/7psrwkv3nsi ... f49795abn71y9-firefox-136.0/bin/firefox" "--marionette" "-no-remote" "-profile" "/tmp/nix-shell.G2HXBz/rust_mozprofileokhrMV"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1741993634552	Marionette	INFO	Marionette enabled
+1741993634707	Marionette	INFO	Listening on port 35757
+Read port: 35757
+console.error: ({})
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://cms.schrackforstudents.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://cms.schrackforstudents.com."
+JavaScript error: https://cms.schrackforstudents.com/_Resources/Static/Packages/Neos.Neos.Ui/Plugins/ckeditor/ckeditor.js, line 356: TypeError: a is undefined
+JavaScript warning: https://cms.schrackforstudents.com/_Resources/Static/Packages/Neos.Twitter.Bootstrap/Libraries/jQuery/jquery-1.10.1.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+1741993764995	Marionette	INFO	Stopped listening on port 35757
+JavaScript error: resource://gre/modules/Sqlite.sys.mjs, line 1296: Error: Sqlite.sys.mjs has been shutdown. Cannot open connection to: /tmp/nix-shell.G2HXBz/rust_mozprofileokhrMV/protections.sqlite
