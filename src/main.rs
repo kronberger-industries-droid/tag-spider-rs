@@ -4,9 +4,10 @@ use json::object::Iter;
 use json::JsonValue;
 use std::collections::HashMap;
 use std::error::Error;
-use std::fs;
 use std::time::Duration;
 use thirtyfour::prelude::*;
+use tokio::fs::File;
+use tokio::io::AsyncWriteExt;
 
 static URL: &str = "https://cms.schrackforstudents.com/neos/login";
 static TAGPATH: &str = concat!(env!("CARGO_MANIFEST_DIR"), "/resources/tags.csv");
@@ -80,20 +81,6 @@ async fn collapse_tree_item(driver: &WebDriver, css_selector: &str) -> WebDriver
 
     collapse_books.click().await?;
 
-    Ok(())
-}
-
-async fn extract_source(driver: &WebDriver) -> WebDriverResult<()> {
-    let iframe = driver
-        .query(By::Css(r#"iframe[name="neos-content-main"]"#))
-        .first()
-        .await?;
-
-    iframe.clone().enter_frame().await?;
-
-    let source = driver.source().await?;
-
-    fs::write("page_source.html", source).expect("Unable to write file");
     Ok(())
 }
 
@@ -198,13 +185,19 @@ async fn add_tags(clear: bool, driver: &WebDriver) -> WebDriverResult<()> {
 
 async fn list_tree(driver: &WebDriver) -> WebDriverResult<()> {
     let filetree = driver.find(By::Css(".style__pageTree___1vfOV")).await?;
-
     let tree_items = filetree.find_all(By::Css("[role='treeitem']")).await?;
 
-    println!("{length}", length = tree_items.len());
+    let path = "filetree.txt";
+    let mut file = File::create(path).await?;
+
+    println!("Number of tree items: {}", tree_items.len());
     for item in tree_items {
         let text = item.text().await?;
-        println!("Tree item: {}", text);
+
+        println!("Tree item: {}\n", text);
+
+        file.write_all(text.as_bytes()).await?;
+        file.write_all(b"\n").await?
     }
 
     Ok(())
@@ -224,16 +217,16 @@ async fn main() -> WebDriverResult<()> {
 
     // collapse_tree_item(&driver, &books_collapse_selector).await?;
 
-    // let welcome_message = r#"
-    // Welcome to the tag spider you can do the following actions by pressing the given keys
+    let welcome_message = r#"
+    Welcome to the tag spider you can do the following actions by pressing the given keys
 
-    // q -> quit the program
-    // a -> add tags (must be in question answer environment)
-    // c -> clear tags (must be in question answer environment)
-    // e -> extract the full source (this is a test)
-    // "#;
+    q -> quit the program
+    a -> add tags (must be in question answer environment)
+    c -> clear tags (must be in question answer environment)
+    e -> extract the full source (this is a test)
+    "#;
 
-    // println!("{}", welcome_message);
+    println!("{}", welcome_message);
 
     loop {
         if let Event::Key(event) = read().unwrap() {
