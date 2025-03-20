@@ -6,6 +6,7 @@
     geckodriver
     openssl
     pkg-config
+    cargo-expand
   ];
   shellHook = ''
     # In your shellHook:

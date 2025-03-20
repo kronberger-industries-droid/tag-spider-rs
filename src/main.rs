@@ -1,16 +1,23 @@
-use crossterm::event::{read, Event, KeyCode, KeyEvent};
+mod tree;
+
+use crossterm::event::{read, Event, KeyCode};
 use csv::Reader;
-use json::object::Iter;
-use json::JsonValue;
 use std::collections::HashMap;
 use std::error::Error;
+use std::fs;
 use std::time::Duration;
-use thirtyfour::prelude::*;
+use thirtyfour::{prelude::*, support};
 use tokio::fs::File;
 use tokio::io::AsyncWriteExt;
 
 static URL: &str = "https://cms.schrackforstudents.com/neos/login";
 static TAGPATH: &str = concat!(env!("CARGO_MANIFEST_DIR"), "/resources/tags.csv");
+
+#[derive(serde::Deserialize)]
+struct Credentials {
+    username: String,
+    password: String,
+}
 
 pub async fn login(driver: &WebDriver) -> WebDriverResult<()> {
     // Read the secret file
@@ -22,26 +29,16 @@ pub async fn login(driver: &WebDriver) -> WebDriverResult<()> {
         }
     };
 
-    // Parse the secret JSON
-    let parsed_secret = json::parse(&secret_content).unwrap_or(JsonValue::Null);
-
-    // Extract username
-    let username = match parsed_secret["username"].as_str() {
-        Some(name) => name.to_string(),
-        None => {
-            println!("Notice: No username found in the secret file.");
-            return Ok(()); // Stop execution as we need a username
+    let credentials: Credentials = match serde_json::from_str(&secret_content) {
+        Ok(credentials) => credentials,
+        Err(e) => {
+            eprintln!("Failed to parse secret file: {}", e);
+            return Ok(());
         }
     };
 
-    // Extract password
-    let password = match parsed_secret["password"].as_str() {
-        Some(pass) => pass.to_string(),
-        None => {
-            println!("Notice: No password found in the secret file.");
-            return Ok(()); // Stop execution as we need a password
-        }
-    };
+    let username = credentials.username;
+    let password = credentials.password;
 
     // Find the login elements
     let username_field = driver.find(By::Id("username")).await?;
@@ -60,6 +57,26 @@ pub async fn login(driver: &WebDriver) -> WebDriverResult<()> {
         .await?;
 
     println!("Login attempt completed.");
+
+    // right now this takes the ready state of the login site, this should be for the cms site!
+
+    loop {
+        let ready_state: String = driver
+            .execute("return document.readyState", Vec::new())
+            .await?
+            .json()
+            .as_str()
+            .unwrap_or("")
+            .to_string();
+
+        if ready_state == "complete" {
+            break;
+        }
+
+        support::sleep(Duration::from_millis(500)).await;
+    }
+
+    println!("\nSite is loaded, you can now start manipulating the site.");
 
     Ok(())
 }
@@ -184,22 +201,55 @@ async fn add_tags(clear: bool, driver: &WebDriver) -> WebDriverResult<()> {
 }
 
 async fn list_tree(driver: &WebDriver) -> WebDriverResult<()> {
-    let filetree = driver.find(By::Css(".style__pageTree___1vfOV")).await?;
-    let tree_items = filetree.find_all(By::Css("[role='treeitem']")).await?;
+    let filetree = driver
+        .find(By::Css(".style__pageTree___1vfOV > div:nth-child(1)"))
+        .await?;
+    let tree_items = filetree
+        .find_all(By::Css(
+            ".style__pageTree___1vfOV > div:nth-child(1) [role='treeitem']",
+        ))
+        .await?;
 
     let path = "filetree.txt";
     let mut file = File::create(path).await?;
 
     println!("Number of tree items: {}", tree_items.len());
     for item in tree_items {
-        let text = item.text().await?;
-
-        println!("Tree item: {}\n", text);
-
-        file.write_all(text.as_bytes()).await?;
-        file.write_all(b"\n").await?
+        if let Some(text) = item.attr("title").await? {
+            println!("Tree item: { }\n", text);
+            file.write_all(text.as_bytes()).await?;
+            file.write_all(b"\n").await?
+        } else {
+            println!("Treeitem has no title attribute");
+        }
     }
 
+    Ok(())
+}
+
+async fn expand_all_collapsed(driver: &WebDriver) -> WebDriverResult<()> {
+    let tree_container = driver.find(By::Css(".style__pageTree___1vfOV")).await?;
+
+    loop {
+        let collapsed_buttons = tree_container
+            .find_all(By::Css("a[class*='node__header__chevron--isCollapsed']"))
+            .await?;
+
+        if collapsed_buttons.is_empty() {
+            println!("No more collapsed items found.");
+            break;
+        }
+
+        println!("Found {} collapsed items.", collapsed_buttons.len());
+
+        for button in collapsed_buttons {
+            button.scroll_into_view().await?;
+            button.click().await?;
+
+            support::sleep(Duration::from_millis(500)).await;
+        }
+        support::sleep(Duration::from_millis(500)).await;
+    }
     Ok(())
 }
 
@@ -213,28 +263,31 @@ async fn main() -> WebDriverResult<()> {
 
     login(&driver).await?;
 
-    // let books_collapse_selector = ".style__pageTree___1vfOV > div:nth-child(1) > div:nth-child(1) > div:nth-child(3) > div:nth-child(7) > div:nth-child(3) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > a:nth-child(3) > svg:nth-child(1)".to_string();
-
-    // collapse_tree_item(&driver, &books_collapse_selector).await?;
-
     let welcome_message = r#"
     Welcome to the tag spider you can do the following actions by pressing the given keys
 
     q -> quit the program
     a -> add tags (must be in question answer environment)
     c -> clear tags (must be in question answer environment)
-    e -> extract the full source (this is a test)
+    e -> expand all the tree items present
+    t -> test a function which is defined in main.rs
     "#;
 
-    println!("{}", welcome_message);
-
     loop {
+        // welcome message is printed twice sometimes?
+        println!("{}", welcome_message);
+
         if let Event::Key(event) = read().unwrap() {
             match event.code {
                 KeyCode::Char('q') => break,
                 KeyCode::Char('a') => add_tags(false, &driver).await?,
                 KeyCode::Char('c') => add_tags(true, &driver).await?,
-                KeyCode::Char('e') => list_tree(&driver).await?,
+                KeyCode::Char('e') => {
+                    // use with caution! This takes pretty long, but has to be tested.
+                    expand_all_collapsed(&driver).await?;
+                    list_tree(&driver).await?;
+                }
+                KeyCode::Char('t') => list_tree(&driver).await?,
                 _ => {}
             }
         }
