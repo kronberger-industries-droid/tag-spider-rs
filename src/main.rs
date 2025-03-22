@@ -9,6 +9,7 @@ use std::time::Duration;
 use thirtyfour::{prelude::*, support};
 use tokio::fs::File;
 use tokio::io::AsyncWriteExt;
+use tree::FileTree;
 
 static URL: &str = "https://cms.schrackforstudents.com/neos/login";
 static TAGPATH: &str = concat!(env!("CARGO_MANIFEST_DIR"), "/resources/tags.csv");
@@ -215,6 +216,13 @@ async fn list_tree(driver: &WebDriver) -> WebDriverResult<()> {
 
     println!("Number of tree items: {}", tree_items.len());
     for item in tree_items {
+        if let Some(text) = item.id().await? {
+            println!("Tree item id: { }\n", text);
+            file.write_all(text.as_bytes()).await?;
+            file.write_all(b"\n").await?
+        } else {
+            println!("Treeitem has no id");
+        }
         if let Some(text) = item.attr("title").await? {
             println!("Tree item: { }\n", text);
             file.write_all(text.as_bytes()).await?;
@@ -253,6 +261,13 @@ async fn expand_all_collapsed(driver: &WebDriver) -> WebDriverResult<()> {
     Ok(())
 }
 
+async fn select_by_id(driver: &WebDriver, locator: &By) -> WebDriverResult<Option<WebElement>> {
+    match driver.find(locator.clone()).await {
+        Ok(el) => Ok(Some(el)),
+        Err(_) => Ok(None),
+    }
+}
+
 #[tokio::main]
 async fn main() -> WebDriverResult<()> {
     let caps = DesiredCapabilities::firefox();
@@ -287,7 +302,19 @@ async fn main() -> WebDriverResult<()> {
                     expand_all_collapsed(&driver).await?;
                     list_tree(&driver).await?;
                 }
-                KeyCode::Char('t') => list_tree(&driver).await?,
+                KeyCode::Char('t') => {
+                    expand_all_collapsed(&driver).await?;
+
+                    // Build the tree.
+                    let file_tree = FileTree::build_tree(&driver).await?;
+
+                    let json_str = serde_json::to_string_pretty(&file_tree)
+                        .expect("Failed to serialize file tree to JSON");
+
+                    tokio::fs::write("tree.json", &json_str)
+                        .await
+                        .expect("Failed to write tree.json");
+                }
                 _ => {}
             }
         }
