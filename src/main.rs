@@ -1,15 +1,13 @@
 // src/main.rs
 
-use crossterm::event::{read, Event, KeyCode};
+use crossterm::event::{Event, KeyCode};
 use csv::Reader;
 use log::{debug, error, info, warn};
 use std::{collections::HashMap, fs, time::Duration};
-use thirtyfour::{prelude::*, support, By, WebDriver, WebElement};
+use tag_spider_rs::{click_item, FileTree, MyLibraryError};
+use thirtyfour::{prelude::*, support, By, WebDriver};
 use tokio::fs::File;
 use tokio::io::AsyncWriteExt;
-
-// Use the library's error and tree modules directly.
-use crate::my_library::{error::MyLibraryError, FileTree};
 
 static URL: &str = "https://cms.schrackforstudents.com/neos/login";
 static TAGPATH: &str = concat!(env!("CARGO_MANIFEST_DIR"), "/resources/tags.csv");
@@ -244,8 +242,9 @@ async fn main() -> Result<(), MyLibraryError> {
                 }
                 KeyCode::Char('t') => {
                     info!("Building file tree...");
-                    expand_all_collapsed(&driver).await?;
+                    // expand_all_collapsed(&driver).await?;
                     let file_tree = FileTree::build_tree(&driver).await?;
+                    info!("File tree finished!");
                     // Save the tree as JSON.
                     let json_str = serde_json::to_string_pretty(&file_tree)?;
                     tokio::fs::write("tree.json", &json_str).await?;
@@ -254,6 +253,10 @@ async fn main() -> Result<(), MyLibraryError> {
                     let loaded_tree = FileTree::from_json_file("tree.json")?;
                     debug!("Loaded tree nodes: {}", loaded_tree.nodes.len());
                     info!("Successfully loaded and validated tree.json");
+                }
+                KeyCode::Char('p') => {
+                    let selector = String::from("treeitem-9621b3b4-label");
+                    click_item(&driver, selector).await?;
                 }
                 _ => {}
             }

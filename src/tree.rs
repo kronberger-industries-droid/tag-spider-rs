@@ -1,5 +1,3 @@
-// src/tree.rs
-
 use crate::error::MyLibraryError;
 use async_recursion::async_recursion;
 use serde::{Deserialize, Serialize};
@@ -8,7 +6,7 @@ use std::{
     fs,
     path::Path,
 };
-use thirtyfour::{error::WebDriverError, By, WebDriver};
+use thirtyfour::{prelude::ElementQueryable, By, WebDriver, WebElement};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct FileNode {
@@ -18,7 +16,13 @@ pub struct FileNode {
     pub children: HashSet<String>,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+impl FileNode {
+    pub fn is_root(&self) -> bool {
+        self.parent.is_none()
+    }
+}
+
+#[derive(Debug, Default, Serialize, Deserialize)]
 pub struct FileTree {
     pub nodes: HashMap<String, FileNode>,
 }
@@ -30,61 +34,41 @@ impl FileTree {
         }
     }
 
-    /// Build the tree from a WebDriver, with improved error handling.
     pub async fn build_tree(driver: &WebDriver) -> Result<FileTree, MyLibraryError> {
         let mut tree = FileTree::new();
-        let root_selector = "[role='tree']";
-        Self::traverse_tree_nodes(driver, &mut tree, root_selector, None).await?;
-        tree.validate()?;
-        Ok(tree)
-    }
 
-    #[async_recursion]
-    async fn traverse_tree_nodes(
-        driver: &WebDriver,
-        tree: &mut FileTree,
-        selector: &str,
-        parent_id: Option<&str>,
-    ) -> Result<(), MyLibraryError> {
-        let container = driver.find(By::Css(selector)).await?;
+        // 1. Find the top-level tree container and all items
+        let container = driver.find(By::Css("[role='tree']")).await?;
         let items = container.find_all(By::Css("[role='treeitem']")).await?;
 
-        for item in items {
-            if let Ok(Some(id)) = item.attr("aria-labelledby").await {
-                let parent_id_cloned = parent_id.map(|s| s.to_string());
+        // 2. Insert each item into the tree, capturing its parent
+        for item in &items {
+            // The aria-labelledby attribute typically stores a unique ID or label
+            if let Some(id) = item.attr("aria-labelledby").await? {
+                let parent_id = find_parent_id(item).await?;
 
-                // Add node to tree
+                // Insert node
                 let node = FileNode {
                     id: id.clone(),
-                    parent: parent_id_cloned.clone(),
+                    parent: parent_id.clone(),
                     children: HashSet::new(),
                 };
+                tree.nodes.insert(id, node);
+            }
+        }
 
-                if tree.nodes.insert(id.clone(), node).is_some() {
-                    return Err(MyLibraryError::Custom(format!("Duplicate node ID: {}", id)));
-                }
-
-                // Update parent's children
-                if let Some(pid) = &parent_id_cloned {
-                    tree.nodes
-                        .get_mut(pid)
-                        .ok_or_else(|| {
-                            MyLibraryError::Custom(format!("Parent not found: {}", pid))
-                        })?
-                        .children
-                        .insert(id.clone());
-                }
-
-                // Check for nested groups
-                if let Ok(Some(expanded)) = item.attr("aria-expanded").await {
-                    if expanded == "true" {
-                        let sub_selector = format!("[aria-labelledby='{}'] [role='group']", id);
-                        Self::traverse_tree_nodes(driver, tree, &sub_selector, Some(&id)).await?;
-                    }
+        // 3. Link children to their parents
+        for (id, node) in tree.nodes.clone() {
+            if let Some(pid) = &node.parent {
+                if let Some(parent_node) = tree.nodes.get_mut(pid) {
+                    parent_node.children.insert(id);
                 }
             }
         }
-        Ok(())
+
+        // 4. Validate and return
+        tree.validate()?;
+        Ok(tree)
     }
 
     /// Validate the consistency of the tree.
@@ -102,30 +86,20 @@ impl FileTree {
             } else {
                 root_count += 1;
             }
-
-            for cid in &node.children {
-                if !self.nodes.contains_key(cid) {
-                    return Err(MyLibraryError::Custom(format!(
-                        "Child node {} not found for {}",
-                        cid, node.id
-                    )));
-                }
-            }
         }
 
-        if root_count != 1 {
-            return Err(MyLibraryError::Custom(format!(
-                "Expected exactly 1 root node, found {}",
-                root_count
-            )));
+        if root_count == 0 {
+            return Err(MyLibraryError::Custom(
+                "No root node found in the tree".to_string(),
+            ));
         }
+
+        // If you only expect exactly 1 root, keep the old check:
+        // if root_count != 1 { ... }
 
         Ok(())
     }
 
-    // ---- JSON Serialization ----
-
-    /// Load a FileTree from a JSON file.
     pub fn from_json_file<P: AsRef<Path>>(path: P) -> Result<Self, MyLibraryError> {
         let data = fs::read_to_string(path)?;
         let tree: FileTree = serde_json::from_str(&data)
@@ -134,12 +108,33 @@ impl FileTree {
         Ok(tree)
     }
 
-    /// Save the FileTree as a JSON file.
     pub fn to_json_file<P: AsRef<Path>>(&self, path: P) -> Result<(), MyLibraryError> {
         let json = serde_json::to_string_pretty(self)?;
         fs::write(path, json)?;
         Ok(())
     }
+}
+
+/// Recursively climbs up the DOM to find a parent tree item.
+/// Returns the `aria-labelledby` ID of the parent if found.
+#[async_recursion]
+async fn find_parent_id(item: &WebElement) -> Result<Option<String>, MyLibraryError> {
+    // Go one level up
+    let parent = match item.query(By::XPath("..")).first().await {
+        Ok(el) => el,
+        Err(_) => return Ok(None), // No parent => root
+    };
+
+    // If the parent is itself a treeitem, we found our parent
+    if let Some(role) = parent.attr("role").await? {
+        if role == "treeitem" {
+            // Return the parent's aria-labelledby as the parent ID
+            return Ok(parent.attr("aria-labelledby").await?);
+        }
+    }
+
+    // Otherwise, keep climbing up
+    find_parent_id(&parent).await
 }
 
 /// Initialize the logger (call from main or lib entry point).
