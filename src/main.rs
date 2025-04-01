@@ -1,15 +1,15 @@
-mod tree;
+// src/main.rs
 
 use crossterm::event::{read, Event, KeyCode};
 use csv::Reader;
-use std::collections::HashMap;
-use std::error::Error;
-use std::fs;
-use std::time::Duration;
-use thirtyfour::{prelude::*, support};
+use log::{debug, error, info, warn};
+use std::{collections::HashMap, fs, time::Duration};
+use thirtyfour::{prelude::*, support, By, WebDriver, WebElement};
 use tokio::fs::File;
 use tokio::io::AsyncWriteExt;
-use tree::FileTree;
+
+// Use the library's error and tree modules directly.
+use crate::my_library::{error::MyLibraryError, FileTree};
 
 static URL: &str = "https://cms.schrackforstudents.com/neos/login";
 static TAGPATH: &str = concat!(env!("CARGO_MANIFEST_DIR"), "/resources/tags.csv");
@@ -20,24 +20,14 @@ struct Credentials {
     password: String,
 }
 
-pub async fn login(driver: &WebDriver) -> WebDriverResult<()> {
+/// Log in using the provided WebDriver.
+pub async fn login(driver: &WebDriver) -> Result<(), MyLibraryError> {
     // Read the secret file
-    let secret_content = match fs::read_to_string("/run/secrets/cms-pswd") {
-        Ok(content) => content,
-        Err(_) => {
-            println!("Notice: No secret file found. Please type in credentials manually.");
-            return Ok(()); // Stop execution as we can't proceed without credentials
-        }
-    };
-
-    let credentials: Credentials = match serde_json::from_str(&secret_content) {
-        Ok(credentials) => credentials,
-        Err(e) => {
-            eprintln!("Failed to parse secret file: {}", e);
-            return Ok(());
-        }
-    };
-
+    let secret_content = fs::read_to_string("/run/secrets/cms-pswd").map_err(|e| {
+        warn!("Failed to read secret file: {}", e);
+        e
+    })?;
+    let credentials: Credentials = serde_json::from_str(&secret_content)?;
     let username = credentials.username;
     let password = credentials.password;
 
@@ -59,8 +49,7 @@ pub async fn login(driver: &WebDriver) -> WebDriverResult<()> {
 
     println!("Login attempt completed.");
 
-    // right now this takes the ready state of the login site, this should be for the cms site!
-
+    // Wait until the page is fully loaded
     loop {
         let ready_state: String = driver
             .execute("return document.readyState", Vec::new())
@@ -73,16 +62,16 @@ pub async fn login(driver: &WebDriver) -> WebDriverResult<()> {
         if ready_state == "complete" {
             break;
         }
-
         support::sleep(Duration::from_millis(500)).await;
     }
 
     println!("\nSite is loaded, you can now start manipulating the site.");
-
+    info!("Login attempt completed");
     Ok(())
 }
 
-fn load_csv_data(path: &str) -> Result<HashMap<String, String>, Box<dyn Error>> {
+/// Load CSV data for tags.
+fn load_csv_data(path: &str) -> Result<HashMap<String, String>, Box<dyn std::error::Error>> {
     let mut tags: HashMap<String, String> = HashMap::new();
     let mut reader = Reader::from_path(path)?;
 
@@ -94,46 +83,13 @@ fn load_csv_data(path: &str) -> Result<HashMap<String, String>, Box<dyn Error>> 
     Ok(tags)
 }
 
-async fn collapse_tree_item(driver: &WebDriver, css_selector: &str) -> WebDriverResult<()> {
-    let collapse_books = driver.query(By::Css(css_selector)).first().await?;
-
-    collapse_books.click().await?;
-
-    Ok(())
-}
-
-async fn extract_content(driver: &WebDriver) -> WebDriverResult<()> {
-    let iframe = driver
-        .query(By::Css(r#"iframe[name="neos-content-main"]"#))
-        .first()
-        .await?;
-
-    iframe.clone().enter_frame().await?;
-
-    let parent = driver
-        .query(By::Css(
-            "html body.neos-backend div.container div.neos-contentcollection",
-        ))
-        .first()
-        .await?
-        .find_all(By::Css(
-            "html body.neos-backend div.container div.neos-contentcollection div",
-        ))
-        .await?;
-
-    let text = parent.first().expect("Nothing found").text().await?;
-    println!("{}", text);
-    Ok(())
-}
-
-async fn add_tags(clear: bool, driver: &WebDriver) -> WebDriverResult<()> {
+/// Example function to add tags.
+async fn add_tags(clear: bool, driver: &WebDriver) -> thirtyfour::error::WebDriverResult<()> {
     let tags = load_csv_data(TAGPATH).unwrap();
-
     let iframe = driver
         .query(By::Css(r#"iframe[name="neos-content-main"]"#))
         .first()
         .await?;
-
     iframe.clone().enter_frame().await?;
 
     let content_collection = driver
@@ -142,7 +98,6 @@ async fn add_tags(clear: bool, driver: &WebDriver) -> WebDriverResult<()> {
         ))
         .first()
         .await?;
-
     let questions = content_collection
         .find_all(By::Css("p.neos-inline-editable.questionTitle"))
         .await?;
@@ -154,7 +109,6 @@ async fn add_tags(clear: bool, driver: &WebDriver) -> WebDriverResult<()> {
         let value = tags.get(id).unwrap();
 
         question.click().await?;
-
         driver.enter_default_frame().await?;
 
         let tag_textbox = driver
@@ -165,21 +119,20 @@ async fn add_tags(clear: bool, driver: &WebDriver) -> WebDriverResult<()> {
         driver
             .action_chain()
             .click_element(&tag_textbox)
-            .key_down(Key::Control)
+            .key_down(thirtyfour::Key::Control)
             .send_keys("a")
-            .key_up(Key::Control)
-            .send_keys(Key::Backspace)
+            .key_up(thirtyfour::Key::Control)
+            .send_keys(thirtyfour::Key::Backspace)
             .perform()
             .await?;
 
         if !clear {
-            match tags.get(id) {
-                Some(_) => tag_textbox.send_keys(value).await?,
-                None => {
-                    eprintln!("Error: key {} not found! Skipping...", id);
-                    iframe.clone().enter_frame().await?;
-                    continue;
-                }
+            if let Some(val) = tags.get(id) {
+                tag_textbox.send_keys(val).await?;
+            } else {
+                eprintln!("Error: key {} not found! Skipping...", id);
+                iframe.clone().enter_frame().await?;
+                continue;
             }
         }
 
@@ -187,21 +140,18 @@ async fn add_tags(clear: bool, driver: &WebDriver) -> WebDriverResult<()> {
             .query(By::Css("#neos-Inspector-Apply"))
             .first()
             .await?;
-
         apply_button.click().await?;
 
         println!("{} -> {}", id, value);
-
         iframe.clone().enter_frame().await?;
-        thirtyfour::support::sleep(Duration::new(1, 0)).await;
+        support::sleep(Duration::new(1, 0)).await;
     }
-
     driver.enter_default_frame().await?;
-
     Ok(())
 }
 
-async fn list_tree(driver: &WebDriver) -> WebDriverResult<()> {
+/// List tree items and save them to a file.
+async fn list_tree(driver: &WebDriver) -> thirtyfour::error::WebDriverResult<()> {
     let filetree = driver
         .find(By::Css(".style__pageTree___1vfOV > div:nth-child(1)"))
         .await?;
@@ -217,43 +167,39 @@ async fn list_tree(driver: &WebDriver) -> WebDriverResult<()> {
     println!("Number of tree items: {}", tree_items.len());
     for item in tree_items {
         if let Some(text) = item.id().await? {
-            println!("Tree item id: { }\n", text);
+            println!("Tree item id: {}\n", text);
             file.write_all(text.as_bytes()).await?;
-            file.write_all(b"\n").await?
+            file.write_all(b"\n").await?;
         } else {
             println!("Treeitem has no id");
         }
         if let Some(text) = item.attr("title").await? {
-            println!("Tree item: { }\n", text);
+            println!("Tree item: {}\n", text);
             file.write_all(text.as_bytes()).await?;
-            file.write_all(b"\n").await?
+            file.write_all(b"\n").await?;
         } else {
             println!("Treeitem has no title attribute");
         }
     }
-
     Ok(())
 }
 
-async fn expand_all_collapsed(driver: &WebDriver) -> WebDriverResult<()> {
+/// Expand all collapsed items in the tree.
+async fn expand_all_collapsed(driver: &WebDriver) -> thirtyfour::error::WebDriverResult<()> {
     let tree_container = driver.find(By::Css(".style__pageTree___1vfOV")).await?;
 
     loop {
         let collapsed_buttons = tree_container
             .find_all(By::Css("a[class*='node__header__chevron--isCollapsed']"))
             .await?;
-
         if collapsed_buttons.is_empty() {
             println!("No more collapsed items found.");
             break;
         }
-
         println!("Found {} collapsed items.", collapsed_buttons.len());
-
         for button in collapsed_buttons {
             button.scroll_into_view().await?;
             button.click().await?;
-
             support::sleep(Duration::from_millis(500)).await;
         }
         support::sleep(Duration::from_millis(500)).await;
@@ -261,59 +207,53 @@ async fn expand_all_collapsed(driver: &WebDriver) -> WebDriverResult<()> {
     Ok(())
 }
 
-async fn select_by_id(driver: &WebDriver, locator: &By) -> WebDriverResult<Option<WebElement>> {
-    match driver.find(locator.clone()).await {
-        Ok(el) => Ok(Some(el)),
-        Err(_) => Ok(None),
-    }
-}
-
 #[tokio::main]
-async fn main() -> WebDriverResult<()> {
+async fn main() -> Result<(), MyLibraryError> {
+    // Initialize the logger.
+    env_logger::Builder::from_env(env_logger::Env::default().default_filter_or("info")).init();
+    info!("Starting application...");
+
+    // Start the WebDriver session.
     let caps = DesiredCapabilities::firefox();
-
     let driver = WebDriver::new("http://localhost:4444", caps).await?;
-
     driver.get(URL).await?;
 
+    // Log in.
     login(&driver).await?;
 
     let welcome_message = r#"
-    Welcome to the tag spider you can do the following actions by pressing the given keys
-
+    Welcome to the tag spider. You can do the following actions by pressing:
+    
     q -> quit the program
     a -> add tags (must be in question answer environment)
     c -> clear tags (must be in question answer environment)
     e -> expand all the tree items present
-    t -> test a function which is defined in main.rs
+    t -> test tree building (builds, saves, and validates the file tree)
     "#;
 
     loop {
-        // welcome message is printed twice sometimes?
         println!("{}", welcome_message);
-
-        if let Event::Key(event) = read().unwrap() {
+        if let Event::Key(event) = crossterm::event::read().unwrap() {
             match event.code {
                 KeyCode::Char('q') => break,
                 KeyCode::Char('a') => add_tags(false, &driver).await?,
                 KeyCode::Char('c') => add_tags(true, &driver).await?,
                 KeyCode::Char('e') => {
-                    // use with caution! This takes pretty long, but has to be tested.
                     expand_all_collapsed(&driver).await?;
                     list_tree(&driver).await?;
                 }
                 KeyCode::Char('t') => {
+                    info!("Building file tree...");
                     expand_all_collapsed(&driver).await?;
-
-                    // Build the tree.
                     let file_tree = FileTree::build_tree(&driver).await?;
-
-                    let json_str = serde_json::to_string_pretty(&file_tree)
-                        .expect("Failed to serialize file tree to JSON");
-
-                    tokio::fs::write("tree.json", &json_str)
-                        .await
-                        .expect("Failed to write tree.json");
+                    // Save the tree as JSON.
+                    let json_str = serde_json::to_string_pretty(&file_tree)?;
+                    tokio::fs::write("tree.json", &json_str).await?;
+                    info!("Successfully saved tree to tree.json");
+                    // Load and validate the saved tree.
+                    let loaded_tree = FileTree::from_json_file("tree.json")?;
+                    debug!("Loaded tree nodes: {}", loaded_tree.nodes.len());
+                    info!("Successfully loaded and validated tree.json");
                 }
                 _ => {}
             }
@@ -321,6 +261,5 @@ async fn main() -> WebDriverResult<()> {
     }
 
     driver.quit().await?;
-
     Ok(())
 }
