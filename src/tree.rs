@@ -1,4 +1,4 @@
-use crate::error::MyLibraryError;
+use crate::error::SpiderError;
 use async_recursion::async_recursion;
 use serde::{Deserialize, Serialize};
 use std::{
@@ -34,7 +34,7 @@ impl FileTree {
         }
     }
 
-    pub async fn build_tree(driver: &WebDriver) -> Result<FileTree, MyLibraryError> {
+    pub async fn build_tree(driver: &WebDriver) -> Result<FileTree, SpiderError> {
         let mut tree = FileTree::new();
 
         // 1. Find the top-level tree container and all items
@@ -72,13 +72,13 @@ impl FileTree {
     }
 
     /// Validate the consistency of the tree.
-    pub fn validate(&self) -> Result<(), MyLibraryError> {
+    pub fn validate(&self) -> Result<(), SpiderError> {
         let mut root_count = 0;
 
         for node in self.nodes.values() {
             if let Some(pid) = &node.parent {
                 if !self.nodes.contains_key(pid) {
-                    return Err(MyLibraryError::Custom(format!(
+                    return Err(SpiderError::Custom(format!(
                         "Parent node {} not found for {}",
                         pid, node.id
                     )));
@@ -89,26 +89,23 @@ impl FileTree {
         }
 
         if root_count == 0 {
-            return Err(MyLibraryError::Custom(
+            return Err(SpiderError::Custom(
                 "No root node found in the tree".to_string(),
             ));
         }
 
-        // If you only expect exactly 1 root, keep the old check:
-        // if root_count != 1 { ... }
-
         Ok(())
     }
 
-    pub fn from_json_file<P: AsRef<Path>>(path: P) -> Result<Self, MyLibraryError> {
+    pub fn from_json_file<P: AsRef<Path>>(path: P) -> Result<Self, SpiderError> {
         let data = fs::read_to_string(path)?;
         let tree: FileTree = serde_json::from_str(&data)
-            .map_err(|e| MyLibraryError::Custom(format!("JSON parse error: {}", e)))?;
+            .map_err(|e| SpiderError::Custom(format!("JSON parse error: {}", e)))?;
         tree.validate()?;
         Ok(tree)
     }
 
-    pub fn to_json_file<P: AsRef<Path>>(&self, path: P) -> Result<(), MyLibraryError> {
+    pub fn to_json_file<P: AsRef<Path>>(&self, path: P) -> Result<(), SpiderError> {
         let json = serde_json::to_string_pretty(self)?;
         fs::write(path, json)?;
         Ok(())
@@ -118,7 +115,7 @@ impl FileTree {
 /// Recursively climbs up the DOM to find a parent tree item.
 /// Returns the `aria-labelledby` ID of the parent if found.
 #[async_recursion]
-async fn find_parent_id(item: &WebElement) -> Result<Option<String>, MyLibraryError> {
+async fn find_parent_id(item: &WebElement) -> Result<Option<String>, SpiderError> {
     // Go one level up
     let parent = match item.query(By::XPath("..")).first().await {
         Ok(el) => el,
@@ -135,9 +132,4 @@ async fn find_parent_id(item: &WebElement) -> Result<Option<String>, MyLibraryEr
 
     // Otherwise, keep climbing up
     find_parent_id(&parent).await
-}
-
-/// Initialize the logger (call from main or lib entry point).
-pub fn init_logger() {
-    env_logger::Builder::from_env(env_logger::Env::default().default_filter_or("info")).init();
 }

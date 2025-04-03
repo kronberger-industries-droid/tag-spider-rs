@@ -2,9 +2,11 @@
 
 use crossterm::event::{Event, KeyCode};
 use csv::Reader;
-use log::{debug, error, info, warn};
+use log::warn;
+use std::path::PathBuf;
 use std::{collections::HashMap, fs, time::Duration};
-use tag_spider_rs::{click_item, FileTree, MyLibraryError};
+use tag_spider_rs::spider::Spider;
+use tag_spider_rs::SpiderError;
 use thirtyfour::{prelude::*, support, By, WebDriver};
 use tokio::fs::File;
 use tokio::io::AsyncWriteExt;
@@ -19,7 +21,7 @@ struct Credentials {
 }
 
 /// Log in using the provided WebDriver.
-pub async fn login(driver: &WebDriver) -> Result<(), MyLibraryError> {
+pub async fn login(driver: &WebDriver) -> Result<(), SpiderError> {
     // Read the secret file
     let secret_content = fs::read_to_string("/run/secrets/cms-pswd").map_err(|e| {
         warn!("Failed to read secret file: {}", e);
@@ -45,8 +47,6 @@ pub async fn login(driver: &WebDriver) -> Result<(), MyLibraryError> {
         .perform()
         .await?;
 
-    println!("Login attempt completed.");
-
     // Wait until the page is fully loaded
     loop {
         let ready_state: String = driver
@@ -63,8 +63,6 @@ pub async fn login(driver: &WebDriver) -> Result<(), MyLibraryError> {
         support::sleep(Duration::from_millis(500)).await;
     }
 
-    println!("\nSite is loaded, you can now start manipulating the site.");
-    info!("Login attempt completed");
     Ok(())
 }
 
@@ -150,9 +148,7 @@ async fn add_tags(clear: bool, driver: &WebDriver) -> thirtyfour::error::WebDriv
 
 /// List tree items and save them to a file.
 async fn list_tree(driver: &WebDriver) -> thirtyfour::error::WebDriverResult<()> {
-    let filetree = driver
-        .find(By::Css(".style__pageTree___1vfOV > div:nth-child(1)"))
-        .await?;
+    let filetree = driver.find(By::Css(".div:nth-child(1)")).await?;
     let tree_items = filetree
         .find_all(By::Css(
             ".style__pageTree___1vfOV > div:nth-child(1) [role='treeitem']",
@@ -184,10 +180,10 @@ async fn list_tree(driver: &WebDriver) -> thirtyfour::error::WebDriverResult<()>
 
 /// Expand all collapsed items in the tree.
 async fn expand_all_collapsed(driver: &WebDriver) -> thirtyfour::error::WebDriverResult<()> {
-    let tree_container = driver.find(By::Css(".style__pageTree___1vfOV")).await?;
+    let tree = driver.find(By::Css("[role='tree']")).await?;
 
     loop {
-        let collapsed_buttons = tree_container
+        let collapsed_buttons = tree
             .find_all(By::Css("a[class*='node__header__chevron--isCollapsed']"))
             .await?;
         if collapsed_buttons.is_empty() {
@@ -206,18 +202,20 @@ async fn expand_all_collapsed(driver: &WebDriver) -> thirtyfour::error::WebDrive
 }
 
 #[tokio::main]
-async fn main() -> Result<(), MyLibraryError> {
+async fn main() -> Result<(), SpiderError> {
     // Initialize the logger.
-    env_logger::Builder::from_env(env_logger::Env::default().default_filter_or("info")).init();
-    info!("Starting application...");
+    tag_spider_rs::init_logger();
 
     // Start the WebDriver session.
-    let caps = DesiredCapabilities::firefox();
-    let driver = WebDriver::new("http://localhost:4444", caps).await?;
-    driver.get(URL).await?;
+    let spider = Spider::new(
+        DesiredCapabilities::firefox(),
+        URL,
+        PathBuf::from("tree.json"),
+    )
+    .await?;
 
     // Log in.
-    login(&driver).await?;
+    login(&spider.driver).await?;
 
     let welcome_message = r#"
     Welcome to the tag spider. You can do the following actions by pressing:
@@ -227,6 +225,7 @@ async fn main() -> Result<(), MyLibraryError> {
     c -> clear tags (must be in question answer environment)
     e -> expand all the tree items present
     t -> test tree building (builds, saves, and validates the file tree)
+    p -> test opening and closing treeitems
     "#;
 
     loop {
@@ -234,35 +233,22 @@ async fn main() -> Result<(), MyLibraryError> {
         if let Event::Key(event) = crossterm::event::read().unwrap() {
             match event.code {
                 KeyCode::Char('q') => break,
-                KeyCode::Char('a') => add_tags(false, &driver).await?,
-                KeyCode::Char('c') => add_tags(true, &driver).await?,
+                KeyCode::Char('a') => add_tags(false, &spider.driver).await?,
+                KeyCode::Char('c') => add_tags(true, &spider.driver).await?,
                 KeyCode::Char('e') => {
-                    expand_all_collapsed(&driver).await?;
-                    list_tree(&driver).await?;
+                    expand_all_collapsed(&spider.driver).await?;
+                    list_tree(&spider.driver).await?;
                 }
-                KeyCode::Char('t') => {
-                    info!("Building file tree...");
-                    // expand_all_collapsed(&driver).await?;
-                    let file_tree = FileTree::build_tree(&driver).await?;
-                    info!("File tree finished!");
-                    // Save the tree as JSON.
-                    let json_str = serde_json::to_string_pretty(&file_tree)?;
-                    tokio::fs::write("tree.json", &json_str).await?;
-                    info!("Successfully saved tree to tree.json");
-                    // Load and validate the saved tree.
-                    let loaded_tree = FileTree::from_json_file("tree.json")?;
-                    debug!("Loaded tree nodes: {}", loaded_tree.nodes.len());
-                    info!("Successfully loaded and validated tree.json");
-                }
+                KeyCode::Char('t') => {}
                 KeyCode::Char('p') => {
-                    let selector = String::from("treeitem-9621b3b4-label");
-                    click_item(&driver, selector).await?;
+                    let selector = "div[aria-labelledby='treeitem-2b58d239-label']";
+                    spider.toggle_treeitem(selector).await?;
                 }
                 _ => {}
             }
         }
     }
 
-    driver.quit().await?;
+    spider.driver.quit().await?;
     Ok(())
 }
