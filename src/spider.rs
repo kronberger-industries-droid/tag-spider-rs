@@ -1,51 +1,56 @@
-// src/spider.rs
-use crate::error::SpiderError;
-use crate::FileTree;
-use log::info;
-use std::path::PathBuf;
+use crate::filenode::FileNode;
+use anyhow::{bail, Context, Result}; // Import anyhow
 use thirtyfour::{prelude::*, WebDriver};
 
 pub struct Spider {
     pub driver: WebDriver,
-    pub root: FileTree,
+    pub current_node: FileNode,
 }
 
 impl Spider {
-    pub async fn new<C>(capabilities: C, url: &str, tree_path: PathBuf) -> Result<Self, SpiderError>
+    pub async fn new<C>(capabilities: C, url: &str, root: &FileNode) -> Result<Self>
     where
         C: Into<Capabilities>,
     {
-        let driver = WebDriver::new("http://localhost:4444", capabilities).await?;
-        driver.get(url).await?;
-        let root = FileTree::from_json_file(tree_path)?;
-        Ok(Self { driver, root })
+        let driver = WebDriver::new("http://localhost:4444", capabilities)
+            .await
+            .context("Failed to create WebDriver")?;
+        driver.get(url).await.context("Failed to navigate to URL")?;
+
+        let current_node = root.clone();
+
+        Ok(Self {
+            driver,
+            current_node,
+        })
     }
 
-    pub async fn toggle_treeitem(&self, selector: &str) -> WebDriverResult<()> {
+    pub async fn toggle_treeitem(&self, selector: &str) -> Result<()> {
         println!("Test");
         let element = self.driver.find(By::Css(selector)).await?;
         let expanded = element.attr("aria-expanded").await?;
         let value = match expanded.as_deref() {
             Some("true") => "false",
             Some("false") => "true",
-            _ => "true",
+            _ => bail!("Got none from aria-expanded"),
         };
-        info! {"Now we try to run JS"}
-        let js = format!(
-            r#"
-            const el = document.querySelector("{selector}");
-            if (el) {{
-                el.setAttribute("aria-expanded", "{value}");
-                return true;
-            }} else {{
-                return false;
-            }}
-            "#,
-            selector = selector,
-            value = value,
-        );
 
-        self.driver.execute(&js, Vec::new()).await?;
+        Ok(())
+    }
+
+    pub async fn click_treeitem_toggle(treeitem: WebElement) -> Result<()> {
+        let treeitem_toggle = treeitem
+            .find(By::Css(
+                "a[data-neos-integrational-test='tree_item_nodeHeader__subTreetoggle']",
+            ))
+            .await
+            .context("Could not find toggle button in this element!")?;
+
+        treeitem_toggle
+            .click()
+            .await
+            .context("Could not click the toggle button!")?;
+
         Ok(())
     }
 }

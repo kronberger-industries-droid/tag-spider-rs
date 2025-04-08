@@ -1,12 +1,12 @@
 // src/main.rs
-
+use anyhow::{Context, Result};
 use crossterm::event::{Event, KeyCode};
 use csv::Reader;
-use log::warn;
+use tag_spider_rs::filenode::FileNode;
+use tag_spider_rs::tree::FileTree;
 use std::path::PathBuf;
 use std::{collections::HashMap, fs, time::Duration};
 use tag_spider_rs::spider::Spider;
-use tag_spider_rs::SpiderError;
 use thirtyfour::{prelude::*, support, By, WebDriver};
 use tokio::fs::File;
 use tokio::io::AsyncWriteExt;
@@ -21,53 +21,57 @@ struct Credentials {
 }
 
 /// Log in using the provided WebDriver.
-pub async fn login(driver: &WebDriver) -> Result<(), SpiderError> {
-    // Read the secret file
-    let secret_content = fs::read_to_string("/run/secrets/cms-pswd").map_err(|e| {
-        warn!("Failed to read secret file: {}", e);
-        e
-    })?;
-    let credentials: Credentials = serde_json::from_str(&secret_content)?;
-    let username = credentials.username;
-    let password = credentials.password;
+pub async fn login(driver: &WebDriver) -> Result<()> {
+    let secret_filepath = PathBuf::from("/run/secrets/cms-pswd");
+
+    let secret_content = match fs::read_to_string(&secret_filepath) {
+        Ok(content) => content,
+        Err(e) => {
+            eprintln!(
+                "Warning: Could not read secret file in: {:?}, Error: {}",
+                secret_filepath, e
+            );
+            return Ok(());
+        }
+    };
+
+    let credentials: Credentials = serde_json::from_str(&secret_content)
+        .context("Secrets are not valid Json with fields 'password' and 'username'")?;
 
     // Find the login elements
-    let username_field = driver.find(By::Id("username")).await?;
-    let password_field = driver.find(By::Id("password")).await?;
-    let login_button = driver.find(By::ClassName("neos-login-btn")).await?;
+    let username_field = driver
+        .find(By::Id("username"))
+        .await
+        .context("Could not find username field!")?;
+
+    let password_field = driver
+        .find(By::Id("password"))
+        .await
+        .context("Could not find a password field!")?;
+
+    let login_button = driver
+        .find(By::ClassName("neos-login-btn"))
+        .await
+        .context("Could not find login button!")?;
 
     // Perform the login action
     driver
         .action_chain()
         .click_element(&username_field)
-        .send_keys(&username)
+        .send_keys(&credentials.username)
         .click_element(&password_field)
-        .send_keys(&password)
+        .send_keys(&credentials.password)
         .click_element(&login_button)
         .perform()
         .await?;
 
-    // Wait until the page is fully loaded
-    loop {
-        let ready_state: String = driver
-            .execute("return document.readyState", Vec::new())
-            .await?
-            .json()
-            .as_str()
-            .unwrap_or("")
-            .to_string();
-
-        if ready_state == "complete" {
-            break;
-        }
-        support::sleep(Duration::from_millis(500)).await;
-    }
+    support::sleep(Duration::from_secs(2)).await;
 
     Ok(())
 }
 
 /// Load CSV data for tags.
-fn load_csv_data(path: &str) -> Result<HashMap<String, String>, Box<dyn std::error::Error>> {
+fn load_csv_data(path: &str) -> Result<HashMap<String, String>> {
     let mut tags: HashMap<String, String> = HashMap::new();
     let mut reader = Reader::from_path(path)?;
 
@@ -80,7 +84,7 @@ fn load_csv_data(path: &str) -> Result<HashMap<String, String>, Box<dyn std::err
 }
 
 /// Example function to add tags.
-async fn add_tags(clear: bool, driver: &WebDriver) -> thirtyfour::error::WebDriverResult<()> {
+async fn add_tags(clear: bool, driver: &WebDriver) -> Result<()> {
     let tags = load_csv_data(TAGPATH).unwrap();
     let iframe = driver
         .query(By::Css(r#"iframe[name="neos-content-main"]"#))
@@ -147,7 +151,7 @@ async fn add_tags(clear: bool, driver: &WebDriver) -> thirtyfour::error::WebDriv
 }
 
 /// List tree items and save them to a file.
-async fn list_tree(driver: &WebDriver) -> thirtyfour::error::WebDriverResult<()> {
+async fn list_tree(driver: &WebDriver) -> Result<()> {
     let filetree = driver.find(By::Css(".div:nth-child(1)")).await?;
     let tree_items = filetree
         .find_all(By::Css(
@@ -179,7 +183,7 @@ async fn list_tree(driver: &WebDriver) -> thirtyfour::error::WebDriverResult<()>
 }
 
 /// Expand all collapsed items in the tree.
-async fn expand_all_collapsed(driver: &WebDriver) -> thirtyfour::error::WebDriverResult<()> {
+async fn expand_all_collapsed(driver: &WebDriver) -> Result<()> {
     let tree = driver.find(By::Css("[role='tree']")).await?;
 
     loop {
@@ -202,15 +206,14 @@ async fn expand_all_collapsed(driver: &WebDriver) -> thirtyfour::error::WebDrive
 }
 
 #[tokio::main]
-async fn main() -> Result<(), SpiderError> {
-    // Initialize the logger.
-    tag_spider_rs::init_logger();
-
+async fn main() -> Result<()> {
+    let filetree = FileTree::from_json_file(PathBuf::from("../resources/tree.json"));
+    let filenode = FileNode::new_root(String::from("someid"), children);
     // Start the WebDriver session.
     let spider = Spider::new(
         DesiredCapabilities::firefox(),
         URL,
-        PathBuf::from("tree.json"),
+        ,
     )
     .await?;
 
@@ -219,7 +222,7 @@ async fn main() -> Result<(), SpiderError> {
 
     let welcome_message = r#"
     Welcome to the tag spider. You can do the following actions by pressing:
-    
+
     q -> quit the program
     a -> add tags (must be in question answer environment)
     c -> clear tags (must be in question answer environment)
