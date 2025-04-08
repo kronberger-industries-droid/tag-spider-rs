@@ -26,7 +26,7 @@ pub async fn login(driver: &WebDriver) -> WebDriverResult<()> {
         Ok(content) => content,
         Err(_) => {
             println!("Notice: No secret file found. Please type in credentials manually.");
-            return Ok(()); // Stop execution as we can't proceed without credentials
+            return Ok(());
         }
     };
 
