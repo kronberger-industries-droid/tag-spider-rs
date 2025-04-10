@@ -12,6 +12,7 @@ use thirtyfour::{prelude::ElementQueryable, By, WebDriver, WebElement};
 #[derive(Debug, Default, Serialize, Deserialize)]
 pub struct FileTree {
     pub nodes: HashMap<String, FileNode>,
+    #[serde(default)]
     pub root: FileNode,
 }
 
@@ -24,7 +25,7 @@ impl FileTree {
     }
 
     pub async fn build_tree(driver: &WebDriver) -> Result<FileTree> {
-        let mut tree = FileTree::new();
+        let mut tree = FileTree::new(String::new());
 
         // Find the top-level tree container and all items
         let container = driver
@@ -80,13 +81,14 @@ impl FileTree {
         }
 
         // Validate and return
-        tree.validate()?;
+        tree.check_root()?;
         Ok(tree)
     }
 
     /// Validate the consistency of the tree.
-    pub fn validate(&self) -> Result<()> {
+    pub fn check_root(&self) -> Result<FileNode> {
         let mut root_count = 0;
+        let mut roots = Vec::new();
 
         for node in self.nodes.values() {
             if let Some(pid) = &node.parent {
@@ -94,11 +96,16 @@ impl FileTree {
                     bail!("Parent node {} not found for {}", pid, node.id);
                 }
             } else {
+                roots.push(node.clone());
                 root_count += 1;
             }
         }
         if root_count == 1 {
-            Ok(())
+            let root = roots
+                .first()
+                .expect("If root_count is 1, there should be at least one entry in roots vec!");
+
+            Ok(root.clone())
         } else if root_count == 0 {
             bail!("Found no root in this FileTree")
         } else {
@@ -111,8 +118,11 @@ impl FileTree {
 
     pub fn from_json_file<P: AsRef<Path>>(path: P) -> Result<Self> {
         let data = fs::read_to_string(path)?;
-        let tree: FileTree = serde_json::from_str(&data).context("could not read json file:")?;
-        tree.validate()?;
+        let mut tree: FileTree =
+            serde_json::from_str(&data).context("could not read json file:")?;
+        if let Ok(root) = tree.check_root() {
+            tree.root = root;
+        };
         Ok(tree)
     }
 

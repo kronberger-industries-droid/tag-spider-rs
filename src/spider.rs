@@ -38,7 +38,7 @@ impl Spider {
         Ok(())
     }
 
-    pub async fn click_treeitem_toggle(treeitem: WebElement) -> Result<()> {
+    pub async fn click_treeitem_toggle(&self, treeitem: WebElement) -> Result<()> {
         let treeitem_toggle = treeitem
             .find(By::Css(
                 "a[data-neos-integrational-test='tree_item_nodeHeader__subTreetoggle']",

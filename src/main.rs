@@ -2,11 +2,10 @@
 use anyhow::{Context, Result};
 use crossterm::event::{Event, KeyCode};
 use csv::Reader;
-use tag_spider_rs::filenode::FileNode;
-use tag_spider_rs::tree::FileTree;
 use std::path::PathBuf;
 use std::{collections::HashMap, fs, time::Duration};
 use tag_spider_rs::spider::Spider;
+use tag_spider_rs::tree::FileTree;
 use thirtyfour::{prelude::*, support, By, WebDriver};
 use tokio::fs::File;
 use tokio::io::AsyncWriteExt;
@@ -207,15 +206,12 @@ async fn expand_all_collapsed(driver: &WebDriver) -> Result<()> {
 
 #[tokio::main]
 async fn main() -> Result<()> {
-    let filetree = FileTree::from_json_file(PathBuf::from("../resources/tree.json"));
-    let filenode = FileNode::new_root(String::from("someid"), children);
-    // Start the WebDriver session.
-    let spider = Spider::new(
-        DesiredCapabilities::firefox(),
-        URL,
-        ,
-    )
-    .await?;
+    let filetree = FileTree::from_json_file(PathBuf::from("resources/tree.json"))
+        .context("Could not create filetree from json")?;
+
+    println!("Filetree root: {:?}", filetree.root);
+
+    let spider = Spider::new(DesiredCapabilities::firefox(), URL, &filetree.root).await?;
 
     // Log in.
     login(&spider.driver).await?;
@@ -244,8 +240,16 @@ async fn main() -> Result<()> {
                 }
                 KeyCode::Char('t') => {}
                 KeyCode::Char('p') => {
-                    let selector = "div[aria-labelledby='treeitem-2b58d239-label']";
-                    spider.toggle_treeitem(selector).await?;
+                    let selector = "div[aria-labelledby='treeitem-524a6ce8-label']";
+                    let treeitem = spider
+                        .driver
+                        .find(By::Css(selector))
+                        .await
+                        .context("Could not find given selector!")?;
+                    spider
+                        .click_treeitem_toggle(treeitem)
+                        .await
+                        .context("Clicking the expander failed!")?;
                 }
                 _ => {}
             }
