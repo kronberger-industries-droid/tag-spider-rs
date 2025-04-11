@@ -37,11 +37,23 @@ impl Spider {
 
         Ok(())
     }
+    pub async fn click_treeitem(&self, treeitem: &WebElement) -> Result<()> {
+        let treeitem_header = treeitem
+            .find(By::ClassName("node__header__labelWrapper___dJ7OH"))
+            .await
+            .context("Could not find treeitem header!")?;
+        treeitem_header
+            .click()
+            .await
+            .context("Treeitem not clickable!")?;
+
+        Ok(())
+    }
 
     pub async fn click_treeitem_toggle(&self, treeitem: WebElement) -> Result<()> {
         let treeitem_toggle = treeitem
-            .find(By::Css(
-                "a[data-neos-integrational-test='tree_item_nodeHeader__subTreetoggle']",
+            .find(By::ClassName(
+                "node__header__chevron___zXVME reset__reset___2e25U",
             ))
             .await
             .context("Could not find toggle button in this element!")?;

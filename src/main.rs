@@ -209,8 +209,6 @@ async fn main() -> Result<()> {
     let filetree = FileTree::from_json_file(PathBuf::from("resources/tree.json"))
         .context("Could not create filetree from json")?;
 
-    println!("Filetree root: {:?}", filetree.root);
-
     let spider = Spider::new(DesiredCapabilities::firefox(), URL, &filetree.root).await?;
 
     // Log in.
@@ -246,10 +244,8 @@ async fn main() -> Result<()> {
                         .find(By::Css(selector))
                         .await
                         .context("Could not find given selector!")?;
-                    spider
-                        .click_treeitem_toggle(treeitem)
-                        .await
-                        .context("Clicking the expander failed!")?;
+                    spider.click_treeitem(&treeitem).await?;
+                    spider.click_treeitem_toggle(treeitem).await?;
                 }
                 _ => {}
             }
