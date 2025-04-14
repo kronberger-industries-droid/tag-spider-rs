@@ -7,8 +7,6 @@ use std::{collections::HashMap, fs, time::Duration};
 use tag_spider_rs::spider::Spider;
 use tag_spider_rs::tree::FileTree;
 use thirtyfour::{prelude::*, support, By, WebDriver};
-use tokio::fs::File;
-use tokio::io::AsyncWriteExt;
 
 static URL: &str = "https://cms.schrackforstudents.com/neos/login";
 static TAGPATH: &str = concat!(env!("CARGO_MANIFEST_DIR"), "/resources/tags.csv");
@@ -149,67 +147,12 @@ async fn add_tags(clear: bool, driver: &WebDriver) -> Result<()> {
     Ok(())
 }
 
-/// List tree items and save them to a file.
-async fn list_tree(driver: &WebDriver) -> Result<()> {
-    let filetree = driver.find(By::Css(".div:nth-child(1)")).await?;
-    let tree_items = filetree
-        .find_all(By::Css(
-            ".style__pageTree___1vfOV > div:nth-child(1) [role='treeitem']",
-        ))
-        .await?;
-
-    let path = "filetree.txt";
-    let mut file = File::create(path).await?;
-
-    println!("Number of tree items: {}", tree_items.len());
-    for item in tree_items {
-        if let Some(text) = item.id().await? {
-            println!("Tree item id: {}\n", text);
-            file.write_all(text.as_bytes()).await?;
-            file.write_all(b"\n").await?;
-        } else {
-            println!("Treeitem has no id");
-        }
-        if let Some(text) = item.attr("title").await? {
-            println!("Tree item: {}\n", text);
-            file.write_all(text.as_bytes()).await?;
-            file.write_all(b"\n").await?;
-        } else {
-            println!("Treeitem has no title attribute");
-        }
-    }
-    Ok(())
-}
-
-/// Expand all collapsed items in the tree.
-async fn expand_all_collapsed(driver: &WebDriver) -> Result<()> {
-    let tree = driver.find(By::Css("[role='tree']")).await?;
-
-    loop {
-        let collapsed_buttons = tree
-            .find_all(By::Css("a[class*='node__header__chevron--isCollapsed']"))
-            .await?;
-        if collapsed_buttons.is_empty() {
-            println!("No more collapsed items found.");
-            break;
-        }
-        println!("Found {} collapsed items.", collapsed_buttons.len());
-        for button in collapsed_buttons {
-            button.scroll_into_view().await?;
-            button.click().await?;
-            support::sleep(Duration::from_millis(500)).await;
-        }
-        support::sleep(Duration::from_millis(500)).await;
-    }
-    Ok(())
-}
-
 #[tokio::main]
 async fn main() -> Result<()> {
     let filetree = FileTree::from_json_file(PathBuf::from("resources/tree.json"))
         .context("Could not create filetree from json")?;
 
-    let spider = Spider::new(DesiredCapabilities::firefox(), URL, &filetree.root).await?;
+    let spider = Spider::new(DesiredCapabilities::firefox(), URL, filetree).await?;
 
     // Log in.
     login(&spider.driver).await?;
@@ -220,8 +163,6 @@ async fn main() -> Result<()> {
     q -> quit the program
     a -> add tags (must be in question answer environment)
     c -> clear tags (must be in question answer environment)
-    e -> expand all the tree items present
-    t -> test tree building (builds, saves, and validates the file tree)
     p -> test opening and closing treeitems
     "#;
 
@@ -232,20 +173,9 @@ async fn main() -> Result<()> {
                 KeyCode::Char('q') => break,
                 KeyCode::Char('a') => add_tags(false, &spider.driver).await?,
                 KeyCode::Char('c') => add_tags(true, &spider.driver).await?,
-                KeyCode::Char('e') => {
-                    expand_all_collapsed(&spider.driver).await?;
-                    list_tree(&spider.driver).await?;
-                }
-                KeyCode::Char('t') => {}
                 KeyCode::Char('p') => {
-                    let selector = "div[aria-labelledby='treeitem-524a6ce8-label']";
-                    let treeitem = spider
-                        .driver
-                        .find(By::Css(selector))
-                        .await
-                        .context("Could not find given selector!")?;
-                    spider.click_treeitem(&treeitem).await?;
-                    spider.click_treeitem_toggle(treeitem).await?;
+                    let id = "treeitem-c6643bf0-label";
+                    spider.extract_content(id).await?;
                 }
                 _ => {}
             }

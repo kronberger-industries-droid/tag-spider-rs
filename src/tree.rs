@@ -9,7 +9,7 @@ use std::{
 };
 use thirtyfour::{prelude::ElementQueryable, By, WebDriver, WebElement};
 
-#[derive(Debug, Default, Serialize, Deserialize)]
+#[derive(Debug, Default, Clone, Serialize, Deserialize)]
 pub struct FileTree {
     pub nodes: HashMap<String, FileNode>,
     #[serde(default)]
