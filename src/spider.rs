@@ -1,10 +1,10 @@
 use std::time::Duration;
 
-use crate::tree::FileTree;
+use crate::{lexer::Lexer, tree::FileTree};
 use anyhow::{bail, Context, Result};
 use async_recursion::async_recursion;
 use thirtyfour::{prelude::*, support, WebDriver};
-use tokio::time::Instant;
+use tokio::{fs, time::Instant};
 
 pub struct Spider {
     pub driver: WebDriver,
@@ -89,27 +89,22 @@ impl Spider {
 
     async fn wait_content_load(&self, timeout: Duration) -> Result<()> {
         let start = Instant::now();
+
         loop {
-            match self
-                .driver
-                .find(By::Css(".style__loadingIndicator__container___1yhsy"))
-                .await
-            {
-                Ok(_) => {
-                    support::sleep(Duration::from_millis(500)).await;
-                }
-                Err(_) => return Ok(()),
-            }
             let loading_bars = self
                 .driver
                 .find_all(By::Css(".style__loadingIndicator__container___1yhsy"))
                 .await?;
+
             if loading_bars.is_empty() {
                 return Ok(());
             }
+
             if start.elapsed() > timeout {
-                bail!("Loading bar did not disappear within the timeout period.");
+                return Ok(());
             }
+
+            support::sleep(Duration::from_millis(500)).await;
         }
     }
 
@@ -118,12 +113,12 @@ impl Spider {
 
         support::sleep(Duration::from_secs(2)).await;
 
+        self.wait_content_load(Duration::from_secs(30)).await?;
+
         self.driver
             .enter_frame(0)
             .await
             .context("Could not enter main content iFrame!")?;
-
-        self.wait_content_load(Duration::from_secs(30)).await?;
 
         let content_collection = self
             .driver
@@ -138,15 +133,33 @@ impl Spider {
             .all_from_selector()
             .await?;
 
+        let mut full_text = String::new();
         for element in elements {
             element.scroll_into_view().await?;
 
             support::sleep(Duration::from_millis(500)).await;
 
             for field in element.find_all(By::Css("p, ul")).await? {
-                println!("{}\n", field.text().await?);
+                let txt = field.text().await?;
+                full_text.push_str(&txt);
+                full_text.push('\n');
             }
         }
+
+        let raw_path = format!("extracted-{}.txt", id);
+        fs::write(&raw_path, &full_text)
+            .await
+            .context("failed to write tokens")?;
+
+        let tokens: Vec<String> = Lexer::new(&full_text).collect();
+
+        let tok_path = format!("tokens-{}.txt", id);
+        let tok_data = tokens.join("\n");
+        fs::write(&tok_path, tok_data)
+            .await
+            .context("failed to write tokens")?;
+
+        self.driver.enter_default_frame().await?;
 
         Ok(())
     }
